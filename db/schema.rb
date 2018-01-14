@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180113133245) do
+ActiveRecord::Schema.define(version: 20180114120220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "match_days", force: :cascade do |t|
+    t.datetime "stop_bet_time"
+    t.integer "day_number"
+    t.bigint "round_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["round_id"], name: "index_match_days_on_round_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "city", default: "", null: false
+    t.datetime "start_time", null: false
+    t.integer "team1_id"
+    t.integer "team2_id"
+    t.integer "score1"
+    t.integer "score2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "match_day_id"
+    t.index ["city"], name: "index_matches_on_city"
+    t.index ["match_day_id"], name: "index_matches_on_match_day_id"
+    t.index ["team1_id"], name: "index_matches_on_team1_id"
+    t.index ["team2_id"], name: "index_matches_on_team2_id"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "first_name", default: "", null: false
@@ -25,6 +50,13 @@ ActiveRecord::Schema.define(version: 20180113133245) do
     t.integer "team_id"
     t.index ["goals"], name: "index_players_on_goals"
     t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.string "title", default: "", null: false
+    t.integer "score_factor", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
