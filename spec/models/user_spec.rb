@@ -25,6 +25,7 @@ RSpec.describe User, type: :model do
   it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_length_of(:password).is_at_least(8) }
   it { should validate_length_of(:password).is_at_most(32) }
+  it { should have_many(:bets) } 
 
   it "returns a user's full name as a string" do
     user = FactoryBot.build(:user, first_name: "Jan", last_name: "Kowalski")

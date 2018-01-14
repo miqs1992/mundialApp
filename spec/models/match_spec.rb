@@ -21,7 +21,7 @@ RSpec.describe Match, type: :model do
 
   it { should validate_presence_of(:start_time) }
   it { should validate_presence_of(:city) }
-  # it { should have_many(:bets) } 
+  it { should have_many(:bets) } 
   it { should belong_to(:match_day) }
   it { should belong_to(:team1).class_name('Team') }
   it { should belong_to(:team2).class_name('Team') }

@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :login
   validates_uniqueness_of :email
 
+  has_many :bets
+
   def name
     self.first_name + " " + self.last_name
   end
