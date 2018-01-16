@@ -7,4 +7,14 @@ class Match < ApplicationRecord
   belongs_to :match_day
 
   has_many :bets
+
+  def winner
+    if(self.score1 == self.score2)
+      return 0
+    elsif(self.score1 > self.score2)
+      return 1
+    else
+      return 2
+    end
+  end
 end

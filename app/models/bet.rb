@@ -8,4 +8,32 @@ class Bet < ApplicationRecord
 
   belongs_to :user
   belongs_to :match
+
+  def calculate
+    match = self.match
+
+    if(match.score1 == self.score1 && match.score2 == self.score2)
+      self.points = 3
+      return
+    end
+
+    if(self.winner == match.winner)
+      self.points = 1
+      return
+    end
+
+    # for recalculations
+    self.points = 0
+  end
+
+  def winner
+    if(self.score1 == self.score2)
+      return 0
+    elsif(self.score1 > self.score2)
+      return 1
+    else
+      return 2
+    end
+  end
+
 end
