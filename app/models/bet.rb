@@ -11,21 +11,18 @@ class Bet < ApplicationRecord
 
   def calculate
     match = self.match
-
-    if(match.finished)
-      if(match.score1 == self.score1 && match.score2 == self.score2)
+    case
+      when !match.finished
+        self.points = 0
+      when match.score1 == self.score1 && match.score2 == self.score2
         self.points = 3
-        return
-      end
-
-      if(self.winner == match.winner)
+      when self.winner == match.winner
         self.points = 1
-        return
-      end
+      else
+        self.points = 0
+    end
   end
 
-  self.points = 0
-  end
 
   def winner
     if(self.score1 == self.score2)

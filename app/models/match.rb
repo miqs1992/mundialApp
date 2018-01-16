@@ -9,16 +9,16 @@ class Match < ApplicationRecord
   has_many :bets
 
   def winner
-    unless(self.finished)
-      return nil
-    end  
-    
-    if(self.score1 == self.score2)
-      return 0
-    elsif(self.score1 > self.score2)
-      return 1
-    else
-      return 2
+    case
+      when !self.finished
+        return nil
+      when self.score1 == self.score2
+        return 0
+      when self.score1 > self.score2
+        return 1
+      else
+        return 2
     end
   end
+
 end
