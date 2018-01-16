@@ -21,28 +21,42 @@ RSpec.describe Match, type: :model do
 
   it { should validate_presence_of(:start_time) }
   it { should validate_presence_of(:city) }
+  it { should validate_numericality_of(:score1).allow_nil }
+  it { should validate_numericality_of(:score2).allow_nil }
   it { should have_many(:bets) } 
   it { should belong_to(:match_day) }
   it { should belong_to(:team1).class_name('Team') }
   it { should belong_to(:team2).class_name('Team') }
 
   it "returns 1 if team1 won" do
-    match = FactoryBot.build(:match, score1: 3, score2: 0, finished: true)
+    match = FactoryBot.build(:match)
+    match.set_score(3,0)
     expect(match.winner).to eql(1)
   end
 
   it "returns 2 if team2 won" do
-    match = FactoryBot.build(:match, score1: 0, score2: 3, finished: true)
+    match = FactoryBot.build(:match)
+    match.set_score(0,3)
     expect(match.winner).to eql(2)
   end
 
   it "returns 0 if it was a draw" do
-    match = FactoryBot.build(:match, score1: 1, score2: 1, finished: true)
+    match = FactoryBot.build(:match)
+    match.set_score(1,1)
     expect(match.winner).to eql(0)
   end
 
   it "returns nil if match is not finished" do
     match = FactoryBot.build(:match, score1: 1, score2: 1)
     expect(match.winner).to eql(nil)
+  end
+
+  it "sets proper score and changes finished to true" do
+    match = FactoryBot.build(:match)
+    expect(match.finished).to eq(false)
+    match.set_score(2,1)
+    expect(match.score1).to eq(2)
+    expect(match.score2).to eq(1)
+    expect(match.finished).to eq(true)    
   end
 end
