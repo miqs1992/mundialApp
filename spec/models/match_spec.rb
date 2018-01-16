@@ -27,24 +27,22 @@ RSpec.describe Match, type: :model do
   it { should belong_to(:team2).class_name('Team') }
 
   it "returns 1 if team1 won" do
-    match = FactoryBot.build(:match)
-    match.score1 = 3
-    match.score2 = 0
+    match = FactoryBot.build(:match, score1: 3, score2: 0, finished: true)
     expect(match.winner).to eql(1)
   end
 
   it "returns 2 if team2 won" do
-    match = FactoryBot.build(:match)
-    match.score1 = 0
-    match.score2 = 3
+    match = FactoryBot.build(:match, score1: 0, score2: 3, finished: true)
     expect(match.winner).to eql(2)
   end
 
   it "returns 0 if it was a draw" do
-    match = FactoryBot.build(:match)
-    match.score1 = 1
-    match.score2 = 1
+    match = FactoryBot.build(:match, score1: 1, score2: 1, finished: true)
     expect(match.winner).to eql(0)
   end
 
+  it "returns nil if match is not finished" do
+    match = FactoryBot.build(:match, score1: 1, score2: 1)
+    expect(match.winner).to eql(nil)
+  end
 end

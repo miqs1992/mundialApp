@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114144048) do
+ActiveRecord::Schema.define(version: 20180116162728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180114144048) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "match_day_id"
+    t.boolean "finished", default: false, null: false
     t.index ["city"], name: "index_matches_on_city"
     t.index ["match_day_id"], name: "index_matches_on_match_day_id"
     t.index ["team1_id"], name: "index_matches_on_team1_id"
