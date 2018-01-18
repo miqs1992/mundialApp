@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def name
     self.first_name + " " + self.last_name
   end
+
+  def points
+    self.bets.pluck(:points).inject(0, :+)
+  end
 end

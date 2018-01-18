@@ -31,4 +31,15 @@ RSpec.describe User, type: :model do
     user = FactoryBot.build(:user, first_name: "Jan", last_name: "Kowalski")
     expect(user.name).to eq "Jan Kowalski"
   end
+
+  it "sums user bids points" do
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:bet, :points => 3, :user => user)
+    FactoryBot.create(:bet, :points => 1, :user => user)
+    FactoryBot.create(:bet, :points => 0, :user => user)
+    user1 = FactoryBot.create(:user)
+    FactoryBot.create(:bet, :points => 3, :user => user1)
+    expect(user.points).to eq 4 
+    expect(user1.points).to eq 3
+  end 
 end
