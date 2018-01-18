@@ -13,13 +13,13 @@ class Bet < ApplicationRecord
     match = self.match
     case
       when !match.finished
-        self.points = 0
+        self.update(:points => 0)
       when match.score1 == self.score1 && match.score2 == self.score2
-        self.points = 3
+        self.update(:points => 3)
       when self.winner == match.winner
-        self.points = 1
+        self.update(:points => 1)
       else
-        self.points = 0
+        self.update(:points => 0)
     end
   end
 

@@ -27,4 +27,10 @@ class Match < ApplicationRecord
     self.update_attributes(:score1 => score1, :score2 => score2, :finished => true)
   end
 
+  def calculate
+    self.bets.each do |b|
+      b.calculate
+    end
+  end  
+
 end
