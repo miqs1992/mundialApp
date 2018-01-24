@@ -17,6 +17,7 @@ gem 'pg', '~> 0.18'
 gem 'devise'
 gem 'bootsnap', require: false
 gem 'kaminari'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
