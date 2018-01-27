@@ -5,4 +5,10 @@ class MatchDay < ApplicationRecord
 
   has_many :matches
   belongs_to :round
+
+  def calculate
+    self.matches.each do |m|
+      m.calculate
+    end
+  end
 end

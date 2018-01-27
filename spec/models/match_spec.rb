@@ -62,21 +62,11 @@ RSpec.describe Match, type: :model do
 
   it "calculates all bets belonging to match" do
     match1 = FactoryBot.create(:match)
-    match2 = FactoryBot.create(:match)
-    user1 = FactoryBot.create(:user)
-    user2 = FactoryBot.create(:user)
-    bet1 = Bet.create(:user => user1, :match => match1, :score1 => 0, :score2 => 2 )
-    bet2 = Bet.create(:user => user2, :match => match1, :score1 => 0, :score2 => 3 )
-    bet3 = Bet.create(:user => user1, :match => match2, :score1 => 0, :score2 => 2 )
-    Bet.create(:user => user2, :match => match2, :score1 => 0, :score2 => 3 )
+    bet1 = FactoryBot.create(:bet, :match => match1, :score1 => 0, :score2 => 2 )
+    bet2 = FactoryBot.create(:bet, :match => match1, :score1 => 0, :score2 => 3 )
     match1.set_score(0,2)
-    match2.set_score(1,0)
     match1.calculate
-    bet1.reload
-    bet2.reload
-    bet3.reload
-    expect(bet1.points).to eq(3)  
-    expect(bet2.points).to eq(1)
-    expect(bet3.points).to eq(0)
+    expect(bet1.reload.points).to eq(3)  
+    expect(bet2.reload.points).to eq(1)
   end
 end
