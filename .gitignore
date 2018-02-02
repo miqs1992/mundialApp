@@ -25,3 +25,5 @@
 /public/packs-test
 
 /config/database.yml
+
+/coverage

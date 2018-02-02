@@ -7,4 +7,12 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap-theme.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'adminlte/dist/css/AdminLTE.css'
+import 'adminlte/dist/js/adminlte.min'
+import 'adminlte/dist/css/skins/_all-skins.min.css'
+import 'font-awesome/css/font-awesome.min.css'
+
+import '../src/stylesheet.scss'
