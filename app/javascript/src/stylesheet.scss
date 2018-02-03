@@ -5,3 +5,28 @@
         }
     }
 }
+
+//footer overrides
+.main-footer{
+    padding: 5px 15px 5px 10px;
+    font-size: 12px;
+    min-height: 41px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+  }
+  //footer overrides - end
+  
+  //header overrides
+  .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+    height: auto;
+  }
+  
+  .navbar-nav > .user-menu > .dropdown-menu > li.user-footer {
+    .btn{
+      margin-bottom: 0;
+      width: 100px;
+    }
+  }
+  //header overrides - end

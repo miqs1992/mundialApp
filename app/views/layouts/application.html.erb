@@ -7,6 +7,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
+    <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type => "image/x-icon" %>
   </head>
 
   <body class="skin-black sidebar-mini fixed" data-controller="<%= controller_name %>" data-action="<%= action_name %>">

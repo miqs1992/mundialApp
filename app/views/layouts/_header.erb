@@ -8,6 +8,25 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-gears"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="user-header">
+              <p>
+                <%= current_user.name %>
+                <small>Zarejestrowany od  <%= l(current_user.created_at, :format=>:short) %></small>
+              </p>
+            </li>
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="/users/edit" class="btn btn-primary btn-flat">Edytuj konto</a>
+              </div>
+              <div class="pull-right">
+                <%= link_to 'Wyloguj', destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-flat' %>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

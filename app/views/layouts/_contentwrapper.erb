@@ -1,4 +1,8 @@
 <div class="content-wrapper">
-<%= render 'layouts/alerts' %>
-<%= yield %>
+  <section class='alerts'>
+    <%= render 'layouts/alerts' %>
+  </section>
+  <section class="content">
+    <%= yield %>
+  </section>
 </div>

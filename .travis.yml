@@ -11,3 +11,4 @@ script:
   - bin/rails db:create 
   - bin/rails db:migrate
   - bin/rspec
+  - bin/rspec spec/system/*

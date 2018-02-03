@@ -37,8 +37,8 @@ group :development do
 end
 
 group :test do
+  gem 'puma'
   gem 'launchy', '~> 2.4.3'
-  gem 'shoulda-matchers', '~> 3.1'
-   
+  gem 'shoulda-matchers', '~> 3.1' 
 end
 
