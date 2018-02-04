@@ -121,6 +121,7 @@ pl:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      access_denied: Nie masz uprawnień do wejścia na tę stronę
       accepted: musi zostać zaakceptowane
       blank: nie może być puste
       confirmation: nie zgadza się z polem %{attribute}

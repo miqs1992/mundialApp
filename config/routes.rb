@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   end
   
   root "home#index"
+
+  resources :users, :except => [:show, :update, :edit]
 end
