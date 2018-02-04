@@ -33,7 +33,7 @@ RSpec.describe 'Login to application', :type => :system do
     expect(page).to have_content I18n.t('devise.failure.not_found_in_database')
   end
 
-  it 'log out', :js => true do
+  it 'log out' do
     user = FactoryBot.create(:user)
     login_as(user)
     visit '/'
