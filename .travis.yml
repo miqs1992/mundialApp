@@ -8,7 +8,7 @@ env:
   - RAILS_ENV=test
 before_script:
   - cp ./.travis.database.yml ./config/database.yml
-  - yarn install
+  - travis_retry yarn install
   - RAILS_ENV=test bin/rails webpacker:compile
   - wget http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
