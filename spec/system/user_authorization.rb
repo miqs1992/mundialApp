@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Login to application', :type => :system do
-  it 'redirect to log in page' do
+  it 'redirects to log in page' do
     visit '/'
     expect(page).to have_content I18n.t('devise.failure.unauthenticated')
   end
 
-  it 'log in by login' do
+  it 'logs in by login' do
     user = FactoryBot.create(:user)
     visit '/'
     fill_in 'user[devise_login]', :with => user.login
@@ -15,7 +15,7 @@ RSpec.describe 'Login to application', :type => :system do
     expect(page).to have_content I18n.t('devise.sessions.signed_in')
   end
 
-  it 'log in by email' do
+  it 'logs in by email' do
     user = FactoryBot.create(:user)
     visit '/'
     fill_in 'user[devise_login]', :with => user.email
@@ -24,7 +24,7 @@ RSpec.describe 'Login to application', :type => :system do
     expect(page).to have_content I18n.t('devise.sessions.signed_in')
   end
 
-  it 'log in with invalid data' do
+  it 'logs in with invalid data' do
     user = FactoryBot.create(:user)
     visit '/'
     fill_in 'user[devise_login]', :with => 'wrong_login'
@@ -33,7 +33,7 @@ RSpec.describe 'Login to application', :type => :system do
     expect(page).to have_content I18n.t('devise.failure.not_found_in_database')
   end
 
-  it 'log out' do
+  it 'logs out' do
     user = FactoryBot.create(:user)
     login_as(user)
     visit '/'
