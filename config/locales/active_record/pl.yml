@@ -1,0 +1,10 @@
+pl:
+  activerecord:
+    attributes:
+      user:
+        password: Hasło
+        email: Email
+        password_confirmation: Potwierdzenie hasła
+        current_password: Obecne hasło
+        first_name: Imię
+        last_name: Nazwisko

@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
-gem 'puma', '~> 3.7'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
@@ -23,6 +23,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.8.2'
   gem 'faker'
@@ -37,8 +38,8 @@ group :development do
 end
 
 group :test do
+  gem 'puma'
   gem 'launchy', '~> 2.4.3'
-  gem 'shoulda-matchers', '~> 3.1'
-   
+  gem 'shoulda-matchers', '~> 3.1' 
 end
 

@@ -1,0 +1,41 @@
+<header class="main-header">
+  <%= link_to root_path, class:'logo', data: { turbolinks: false } do %>
+      <span class="logo-mini"><b>Typer</b></span>
+      <span class="logo-lg"><%=image_tag("football.png")%><b>Mundial Typer</b></span>
+  <% end %>
+
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <% if current_user.admin %>
+          <li>
+            <a href=<%= users_path %>>
+              <i class="fa fa-user-circle-o"></i>
+            </a>
+          </li>
+        <% end %>
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-gears"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="user-header">
+              <p>
+                <%= current_user.name %>
+                <small>Zarejestrowany od  <%= l(current_user.created_at, :format=>:short) %></small>
+              </p>
+            </li>
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="/users/edit" class="btn btn-primary btn-flat">Edytuj konto</a>
+              </div>
+              <div class="pull-right">
+                <%= link_to 'Wyloguj', destroy_user_session_path, :method => :delete, :class => 'btn btn-warning btn-flat' %>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
