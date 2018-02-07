@@ -13,7 +13,7 @@ gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
-gem 'pg', '~> 1.0'
+gem 'pg', '~> 0.21'
 gem 'devise'
 gem 'bootsnap', require: false
 gem 'kaminari'
