@@ -28,9 +28,4 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:login, :email, :first_name, :last_name)
     end
-
-    def authorize_admin
-        return unless !current_user.admin?
-        redirect_to root_path, alert: I18n.t('errors.messages.access_denied') 
-    end
 end
