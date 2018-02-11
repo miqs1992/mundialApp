@@ -11,9 +11,7 @@ class UsersController < ApplicationController
     
     def create
         @user = User.new(user_params) 
-        password = (0...16).map { (65 + rand(26)).chr }.join
-        @user.password = password
-        @user.password_confirmation = password
+        @user.password = SecureRandom.hex
         if @user.save
             @user.send_new_account_message
             flash[:notice] = "Utworzono nowego użytkownika"

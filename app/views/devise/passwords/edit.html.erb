@@ -1,22 +1,40 @@
-<h2>Change your password</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mundial Typer</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <%= javascript_pack_tag 'application' %>
+  <%= stylesheet_pack_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/"><b>Mundial Typer</a>
+  </div>
+  <%= render 'devise/alerts', object: resource %>
+  <div class="login-box-body">
+    <p class="login-box-msg">Zmiana hasła</p>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :patch }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+      <div class="form-group has-feedback">
+        <%= f.password_field :password, class: 'form-control', autocomplete: 'off', placeholder: 'Hasło' %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.hidden_field :reset_password_token %>
+      <div class="form-group has-feedback">
+        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off', placeholder: 'Potwierdzenie hasła' %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <div class="row">
+        <div class="col-xs-offset-8 col-xs-4">
+          <%= f.submit 'Zmień', class: 'btn btn-primary btn-block btn-flat' %>
+        </div>
+      </div>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+</div>
+</body>
+</html>
