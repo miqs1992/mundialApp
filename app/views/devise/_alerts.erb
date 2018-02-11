@@ -1,0 +1,26 @@
+<% if object.errors.any? %>
+  <div class="alert alert-devise alert-danger alert-dismissable">
+    <i class="fa fa-ban"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <% object.errors.full_messages.each do |msg| %>
+      <b><%= msg %></b></br>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- using this instead of layout/alerts because of margins -->
+<% if alert %>
+  <div class="alert alert-devise alert-danger alert-dismissable">
+    <i class="fa fa-ban"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <b><%= alert %></b>
+  </div>
+<% end %>
+
+<% if notice %>
+  <div class="alert alert-devise alert-success alert-dismissable">
+    <i class="fa fa-check"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <b><%= notice %></b>
+  </div>
+<% end %>

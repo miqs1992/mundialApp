@@ -1,16 +1,35 @@
-<h2>Forgot your password?</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Divis3 | Log in</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="/">Mundial Typer</a>
+      </div>
+      <%= render 'devise/alerts', object: resource %>
+      <div class="login-box-body">
+        <p class="login-box-msg">Zapomniałeś hasła?</p>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <div class="form-group has-feedback">
+            <%= f.text_field :email, class: 'form-control', autofocus: true, autocomplete: "email", placeholder: 'E-mail' %>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+          <div class="row">
+            <div class="col-xs-offset-8 col-xs-4">
+              <%= f.submit 'Wyślij', class: 'btn btn-primary btn-block btn-flat' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

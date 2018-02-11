@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActiveJob::TestHelper
 
 RSpec.describe 'User management', :type => :system do
     it 'allows user to change profile info' do

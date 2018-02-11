@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
+gem 'dotenv-rails', groups: [:development, :test]
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -18,6 +19,7 @@ gem 'devise'
 gem 'bootsnap', require: false
 gem 'kaminari'
 gem 'coveralls', require: false
+gem 'premailer-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
