@@ -15,6 +15,7 @@ class UsersController < ApplicationController
         @user.password = password
         @user.password_confirmation = password
         if @user.save
+            @user.send_new_account_message
             flash[:notice] = "Utworzono nowego użytkownika"
             redirect_to users_path
         else

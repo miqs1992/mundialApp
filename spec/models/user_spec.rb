@@ -42,4 +42,12 @@ RSpec.describe User, type: :model do
     expect(user.points).to eq 4 
     expect(user1.points).to eq 3
   end 
+
+  it "sends welcome mail" do
+    user = FactoryBot.create(:user)
+    ActiveJob::Base.queue_adapter = :test
+    expect {
+      user.send_new_account_message
+    }.to have_enqueued_job.on_queue('mailers')
+  end
 end
