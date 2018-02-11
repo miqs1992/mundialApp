@@ -23,5 +23,6 @@ module MundialApp
      config.autoload_paths += Dir["#{config.root}/lib/"]
  
      config.active_record.default_timezone = :local
+     config.active_job.queue_adapter = :async
   end
 end

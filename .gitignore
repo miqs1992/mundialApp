@@ -27,3 +27,5 @@
 /config/database.yml
 
 /coverage
+
+.env

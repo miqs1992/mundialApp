@@ -30,4 +30,18 @@ class User < ApplicationRecord
       where(conditions.to_hash).first
     end
   end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def send_new_account_message
+    raw_token, hashed_token = Devise.token_generator.generate(User, :reset_password_token)
+    self.reset_password_token = hashed_token
+    self.reset_password_sent_at = Time.current
+    self.save!
+    UserMailer.init_password_email(self, raw_token).deliver_later
+  end
+
+
 end

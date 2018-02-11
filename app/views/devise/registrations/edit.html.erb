@@ -13,7 +13,7 @@
   <div class="login-logo">
     <a href="/">Mundial Typer</a>
   </div>
-  <%= render 'devise/shared/alerts' %>
+  <%= render 'devise/alerts', object: resource %>
   <div class="login-box-body">
     <p class="login-box-msg">Aktualizacja danych</p>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch }) do |f| %>
