@@ -69,4 +69,21 @@ RSpec.describe Match, type: :model do
     expect(bet1.reload.points).to eq(3)  
     expect(bet2.reload.points).to eq(1)
   end
+
+  it "prints score when finished" do
+    match = FactoryBot.create(:match)
+    match.set_score(0,2)
+    expect(match.print_score).to eq("0 - 2")
+  end
+
+  it "prints score during playing" do
+    match = FactoryBot.create(:match, :start_time => (Time.current - 30.minutes))
+    expect(match.print_score).to eq("w trakcie")
+  end
+
+  it "prints start time if brefore start" do
+    start_time = Time.current + 1.hour
+    match = FactoryBot.create(:match, :start_time => start_time)
+    expect(match.print_score).to eq(I18n.l(start_time, format: :short))
+  end
 end

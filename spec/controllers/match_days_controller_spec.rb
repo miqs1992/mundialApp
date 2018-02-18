@@ -9,18 +9,6 @@ RSpec.describe MatchDaysController, type: :controller do
         @match_day = FactoryBot.create(:match_day, :round => @round)
     end
 
-    describe "#index" do
-        it "responds successfully" do
-            get :index, params: { round_id: @round.id }
-            expect(response).to be_success
-        end
-    
-        it "returns a 200 response" do
-            get :index, params: { round_id: @round.id }
-            expect(response).to have_http_status "200"
-        end
-    end
-
     describe "#show" do
         it "responds successfully" do
             get :show, params: { round_id: @round.id, id: @match_day.id }
