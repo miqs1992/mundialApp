@@ -66,7 +66,7 @@ RSpec.describe MatchDaysController, type: :controller do
                     round_id: @round.id,
                     match_day: FactoryBot.attributes_for(:match_day)
                 }
-                expect(response).to redirect_to round_match_days_path(round_id:  @round.id)
+                expect(response).to redirect_to round_path(id:  @round.id)
             end
         end
 

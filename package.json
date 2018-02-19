@@ -5,6 +5,7 @@
     "@rails/webpacker": "^3.2.0",
     "adminlte": "^2.4.1",
     "bootstrap": "3.3.7",
+    "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {

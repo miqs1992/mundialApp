@@ -3,6 +3,11 @@
         <div class="box box-primary text-center">
             <div class="box-header">
               <h3 class="box-title">Runda: <%= @round.title %></h3>
+              <div class="box-tools">
+                <% if current_user.admin %>
+                    <%= link_to "Nowy dzień", new_round_match_day_path(@round.id), :class => "btn btn-primary btn-sm" %>
+                <% end %>
+              </div>
             </div>
             <div class="box-body no-padding">
                 <table class="table table-striped table-bordered">

@@ -14,5 +14,6 @@ import 'adminlte/dist/css/AdminLTE.css'
 import 'adminlte/dist/js/adminlte.min'
 import 'adminlte/dist/css/skins/_all-skins.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import 'flag-icon-css/css/flag-icon.min.css'
 
 import '../src/stylesheet.scss'

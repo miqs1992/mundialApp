@@ -1,0 +1,22 @@
+<div class='row'>
+    <div class='col-lg-12'>
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Nowa runda</h3>
+            </div>
+            <%= form_for @round do |f| %>
+                <div class="box-body">
+                    <div class="form-group">
+                        <%= f.text_field :title, class: 'form-control', autofocus: true, placeholder: "Tytul rundy"  %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.number_field :score_factor, class: 'form-control', autofocus: true, placeholder: "Mnożnik wyniku", :input_html => { :value => 1 }   %>
+                    </div>
+                    <div class="box-footer">
+                        <%= f.submit "Utwórz rundę", class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

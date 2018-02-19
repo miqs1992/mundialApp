@@ -44,15 +44,17 @@
                             <th>Miejsce</th>
                             <th>Drużyna 1</th>
                             <th>Drużyna 2</th>
-                            <th>Link</th>
+                            <th>Wynik / data</th>
+                            <th>Twój typ</th>
                         </tr>
                         <% @match_day.matches.each do |m| %>
                             <tr>
                                 <td><%= m.id %></td>
                                 <td><%= m.city %></td>
-                                <td><%= m.team1.name %></td>
-                                <td><%= m.team2.name %></td>
-                                <td></td>
+                                <td><span class="flag-icon flag-icon-<%= m.team1.flag %>"></span> <%= m.team1.name %></td>
+                                <td><span class="flag-icon flag-icon-<%= m.team2.flag %>"></span> <%= m.team2.name %></td>
+                                <td><%= m.print_score %></td>
+                                <td><%= print_bet(current_user.id, m, @match_day.stop_bet_time) %></td>
                             </tr>
                         <% end %>
                     </tbody>
