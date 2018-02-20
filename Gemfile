@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.1.5'
 gem 'dotenv-rails', groups: [:development, :test]
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'sass-rails', '~> 5.0'
@@ -23,7 +23,7 @@ gem 'premailer-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 2.18'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'rspec-rails', '~> 3.7'

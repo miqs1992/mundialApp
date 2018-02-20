@@ -12,7 +12,7 @@ before_script:
   - RAILS_ENV=test bin/rails webpacker:compile
   - wget http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
-  - sudo apt-get install libnss3
+  - sudo apt-get install libnss3 libffi-dev
   - sudo apt-get --only-upgrade install google-chrome-stable
   - sudo cp chromedriver /usr/local/bin/.
   - sudo chmod +x /usr/local/bin/chromedriver
