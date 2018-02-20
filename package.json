@@ -2,13 +2,13 @@
   "name": "mundialApp",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.0",
+    "@rails/webpacker": "^3.2.2",
     "adminlte": "^2.4.1",
     "bootstrap": "3.3.7",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.10.1"
+    "webpack-dev-server": "^2.11.1"
   }
 }
