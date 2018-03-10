@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :login])
   end
+
+  def authorize_admin
+    return unless !current_user.admin?
+    redirect_to root_path, alert: I18n.t('errors.messages.access_denied') 
+  end
 end

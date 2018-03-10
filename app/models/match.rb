@@ -31,6 +31,17 @@ class Match < ApplicationRecord
     self.bets.each do |b|
       b.calculate
     end
-  end  
+  end 
+  
+  def print_score
+    if self.finished
+      return "#{self.score1} - #{score2}"
+    end
 
+    if(Time.current > self.start_time)
+      return "w trakcie"
+    end
+
+    return I18n.l(self.start_time, format: :short)
+  end
 end

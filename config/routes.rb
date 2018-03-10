@@ -8,5 +8,12 @@ Rails.application.routes.draw do
   
   root "home#index"
 
-  resources :users, :except => [:show, :update, :edit]
+  resources :users, :except => [:show, :update, :edit] do
+    resources :bets, :except => [:destroy]
+  end
+  resources :rounds, :except => [:edit, :update, :destroy] do
+    resources :match_days, :except => [:edit, :update, :destroy, :index] do
+      resources :matches, :except => [:edit, :update, :destroy, :index]
+    end
+  end
 end
