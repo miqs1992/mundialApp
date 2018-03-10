@@ -9,11 +9,20 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :users, :except => [:show, :update, :edit] do
-    resources :bets, :except => [:destroy]
+    resources :bets, :only => [:index]
   end
-  resources :rounds, :except => [:edit, :update, :destroy] do
-    resources :match_days, :except => [:edit, :update, :destroy, :index] do
-      resources :matches, :except => [:edit, :update, :destroy, :index]
+  
+  resources :match_days, :only => [:show] do
+    member do
+      patch 'set_bets'
     end
   end
+
+  resources :matches, :except => [:destroy] do
+    member do
+      get 'edit_score'
+      patch 'set_score'
+    end
+  end
+  
 end
