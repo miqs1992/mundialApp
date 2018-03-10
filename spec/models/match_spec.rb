@@ -6,9 +6,9 @@ RSpec.describe Match, type: :model do
   end
 
   it "is valid with city, 2 teams and time" do
-    team1 = FactoryBot.build(:team)
-    team2 = FactoryBot.build(:team)
-    day = FactoryBot.build(:match_day)
+    team1 = FactoryBot.create(:team)
+    team2 = FactoryBot.create(:team)
+    day = FactoryBot.create(:match_day)
     match = Match.new(
       start_time: Time.current,
       team1: team1,
@@ -17,6 +17,19 @@ RSpec.describe Match, type: :model do
       match_day: day
     )
     expect(match).to be_valid  
+  end
+
+  it "is invalid with same team as tema1 and team2" do
+    team1 = FactoryBot.create(:team)
+    day = FactoryBot.create(:match_day)
+    match = Match.new(
+      start_time: Time.current,
+      team1: team1,
+      team2: team1,
+      city: "Moscow",
+      match_day: day
+    )
+    expect(match).to_not be_valid  
   end
 
   it { should validate_presence_of(:start_time) }
@@ -81,9 +94,21 @@ RSpec.describe Match, type: :model do
     expect(match.print_score).to eq("w trakcie")
   end
 
-  it "prints start time if brefore start" do
+  it "prints edit_score link if before start" do
     start_time = Time.current + 1.hour
     match = FactoryBot.create(:match, :start_time => start_time)
-    expect(match.print_score).to eq(I18n.l(start_time, format: :short))
+    expect(match.print_score).to eq(
+      ActionController::Base.helpers.link_to "Ustaw", 
+      Rails.application.routes.url_helpers.edit_score_match_path(match.id), 
+      :class => "btn btn-primary btn-xs"
+    )
+  end
+
+  it "prints teams" do 
+    team1 = FactoryBot.create(:team)
+    team2 = FactoryBot.create(:team)
+    match = FactoryBot.create(:match, :team1 => team1, :team2 => team2)
+    expected = "<span class=\"flag-icon flag-icon-#{team1.flag}\"></span> #{team1.name} - <span class=\"flag-icon flag-icon-#{team2.flag}\"></span> #{team2.name}"
+    expect(match.print_teams).to eq(expected)
   end
 end

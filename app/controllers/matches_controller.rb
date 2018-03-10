@@ -2,7 +2,7 @@ class MatchesController < ApplicationController
     before_action :authorize_admin
 
     def index
-        @match = Match.all.order(:start_time)
+        @matches = Match.includes(:team1, :team2, :match_day).all.order(:start_time)
     end
 
     def show

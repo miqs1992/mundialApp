@@ -3,6 +3,7 @@ class Match < ApplicationRecord
   validates_presence_of :start_time
   validates_numericality_of :score1, :allow_nil => true
   validates_numericality_of :score2, :allow_nil => true
+  validate :team1_and_team2_are_different
 
   belongs_to :team1, class_name: "Team", foreign_key: "team1_id"
   belongs_to :team2, class_name: "Team", foreign_key: "team2_id"
@@ -42,6 +43,17 @@ class Match < ApplicationRecord
       return "w trakcie"
     end
 
-    return I18n.l(self.start_time, format: :short)
+    return ActionController::Base.helpers.link_to "Ustaw", Rails.application.routes.url_helpers.edit_score_match_path(self.id), :class => "btn btn-primary btn-xs"
   end
+
+  def print_teams
+    [self.team1, self.team2].collect {|t| "<span class=\"flag-icon flag-icon-#{t.flag}\"></span> #{t.name}" }.join(" - ")
+  end
+
+  private
+
+    def team1_and_team2_are_different
+      errors.add(:team1, "must be different than Team2") if team1_id == team2_id
+    end 
+
 end
