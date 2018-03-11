@@ -45,6 +45,7 @@ class MatchesController < ApplicationController
         score2 = params[:match][:score2].to_i
         if score_params && score1 >= 0 && score2 >= 0
             @match.set_score(params[:match][:score1], params[:match][:score2])
+            @match.calculate
             redirect_to matches_path, notice: "Ustawiono wynik meczu o id #{@match.id}"
         else
             redirect_to edit_score_match_path(id: @match.id), alert: "Wystapił błąd"

@@ -1,4 +1,13 @@
 <aside class="main-sidebar" id="main-menu">
   <section class="sidebar">
+    <ul class="sidebar-menu tree" data-widget="tree">
+      <% if current_user.admin? %>
+        <li>
+          <a href="<%= matches_path %>">
+            <i class="fa fa-soccer-ball-o"></i> <span>Mecze</span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </section>
 </aside>

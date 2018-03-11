@@ -22,13 +22,13 @@
                             <th>Edycja</th>
                         </tr>
                         <% @matches.each do |match| %>
-                            <tr>
+                            <tr id="match_<%= match.id %>">
                                 <td><%= match.id %></td>
                                 <td><%= match.match_day.day_number %></td>
                                 <td><%= match.print_teams.html_safe %></td>
                                 <td><%= match.city %></td>
                                 <td><%= I18n.l(match.start_time, format: :short) %></td>
-                                <td><%= match.print_score %></td>
+                                <td><%= print_score(match) %></td>
                                 <td><%= link_to "Edit", edit_match_path(match.id), :class => "btn btn-primary btn-xs" %></td>
                             </tr>
                         <% end %>

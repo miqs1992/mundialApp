@@ -1,0 +1,28 @@
+<%= form_for @match do |f| %>
+    <div class="box-body">
+        <div class="form-group">
+            <label>Dzień meczowy</label>
+            <%= f.collection_select(:match_day_id, MatchDay.all.order(:day_number), :id, :day_number, {}, {class: 'form-control'}) %>
+        </div>
+        <div class="form-group">
+            <label>Drużyna 1</label>
+            <%= f.collection_select(:team1_id, Team.all.order(:name), :id, :name, {}, {class: 'form-control'}) %>
+        </div>
+        <div class="form-group">
+            <label>Drużyna 2</label>
+            <%= f.collection_select(:team2_id, Team.all.order(:name), :id, :name, {}, {class: 'form-control'}) %>
+        </div>
+        <div class="form-group">
+            <label>Miasto</label>
+            <%= f.text_field :city, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+            <label>Godzina rozpoczęcia</label>
+            <%= f.datetime_local_field :start_time, class: 'form-control' %>
+        </div>
+        <div class="box-footer">
+            <%= f.submit button, class: 'btn btn-primary' %>
+            <%= link_to "Powrót", matches_path, :class => "btn btn-warning pull-right" %>
+        </div>
+    </div>
+<% end %>

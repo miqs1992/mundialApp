@@ -33,18 +33,6 @@ class Match < ApplicationRecord
       b.calculate
     end
   end 
-  
-  def print_score
-    if self.finished
-      return "#{self.score1} - #{score2}"
-    end
-
-    if(Time.current > self.start_time)
-      return "w trakcie"
-    end
-
-    return ActionController::Base.helpers.link_to "Ustaw", Rails.application.routes.url_helpers.edit_score_match_path(self.id), :class => "btn btn-primary btn-xs"
-  end
 
   def print_teams
     [self.team1, self.team2].collect {|t| "<span class=\"flag-icon flag-icon-#{t.flag}\"></span> #{t.name}" }.join(" - ")

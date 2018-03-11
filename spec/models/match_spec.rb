@@ -83,27 +83,6 @@ RSpec.describe Match, type: :model do
     expect(bet2.reload.points).to eq(1)
   end
 
-  it "prints score when finished" do
-    match = FactoryBot.create(:match)
-    match.set_score(0,2)
-    expect(match.print_score).to eq("0 - 2")
-  end
-
-  it "prints score during playing" do
-    match = FactoryBot.create(:match, :start_time => (Time.current - 30.minutes))
-    expect(match.print_score).to eq("w trakcie")
-  end
-
-  it "prints edit_score link if before start" do
-    start_time = Time.current + 1.hour
-    match = FactoryBot.create(:match, :start_time => start_time)
-    expect(match.print_score).to eq(
-      ActionController::Base.helpers.link_to "Ustaw", 
-      Rails.application.routes.url_helpers.edit_score_match_path(match.id), 
-      :class => "btn btn-primary btn-xs"
-    )
-  end
-
   it "prints teams" do 
     team1 = FactoryBot.create(:team)
     team2 = FactoryBot.create(:team)
