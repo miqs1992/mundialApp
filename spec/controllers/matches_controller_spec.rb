@@ -9,18 +9,6 @@ RSpec.describe MatchesController, type: :controller do
         @match = FactoryBot.create(:match, :match_day => @match_day)
     end
 
-    describe "#show" do
-        it "responds successfully" do
-            get :show, params: { id: @match.id }
-            expect(response).to be_success
-        end
-    
-        it "returns a 200 response" do
-            get :show, params: { id: @match.id }
-            expect(response).to have_http_status "200"
-        end
-    end
-
     describe "#index" do
         it "responds successfully" do
             get :index

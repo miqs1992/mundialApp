@@ -5,10 +5,6 @@ class MatchesController < ApplicationController
         @matches = Match.includes(:team1, :team2, :match_day).all.order(:start_time)
     end
 
-    def show
-        @match = Match.find(params[:id])
-    end
-
     def new
         @match = Match.new
     end

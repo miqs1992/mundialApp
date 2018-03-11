@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :matches, :except => [:destroy] do
+  resources :matches, :except => [:destroy, :show] do
     member do
       get 'edit_score'
       patch 'set_score'
