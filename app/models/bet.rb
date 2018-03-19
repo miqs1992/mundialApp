@@ -5,6 +5,8 @@ class Bet < ApplicationRecord
   validates_presence_of :score1
   validates_presence_of :score2
   validates_presence_of :points
+  validates_uniqueness_of :user_id, scope: :match_id
+  validate :stop_bet_time_is_ok
 
   belongs_to :user
   belongs_to :match
@@ -23,7 +25,6 @@ class Bet < ApplicationRecord
     end
   end
 
-
   def winner
     if(self.score1 == self.score2)
       return 0
@@ -33,5 +34,12 @@ class Bet < ApplicationRecord
       return 2
     end
   end
+
+  private
+
+    def stop_bet_time_is_ok
+      return if self.match.nil? #crashed other tests
+      errors.add(:base, "It is too late for changing") if self.match.match_day.stop_bet_time < Time.current
+    end 
 
 end
