@@ -6,8 +6,8 @@ RSpec.describe Bet, type: :model do
   end
 
   it "is valid with user, match and scores" do
-    user = FactoryBot.build(:user)
-    match = FactoryBot.build(:match)
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
     bet = Bet.new(
       user: user,
       match: match,
@@ -15,6 +15,19 @@ RSpec.describe Bet, type: :model do
       score2: 2
     )
     expect(bet).to be_valid  
+  end
+
+  it "is invalid if the same pair of user and match" do
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
+    FactoryBot.create(:bet, match: match, user: user)
+    bet = Bet.new(
+      user: user,
+      match: match,
+      score1: 0,
+      score2: 2
+    )
+    expect(bet).not_to be_valid 
   end
 
   it { should belong_to(:user) }
@@ -25,6 +38,21 @@ RSpec.describe Bet, type: :model do
   it { should validate_presence_of(:score1) }
   it { should validate_presence_of(:score2) }
   it { should validate_presence_of(:points) }
+
+  it "is invalid if Time.current is bigger than match day's stop bet time" do
+    match_day = FactoryBot.create(:match_day, stop_bet_time: Time.current - 1.hour)
+    match = FactoryBot.create(:match, match_day: match_day)
+    bet = FactoryBot.build(:bet, match: match)
+    expect(bet).not_to be_valid 
+  end
+
+  it "does not update if Time.current is bigger than match day's stop bet time" do
+    match_day = FactoryBot.create(:match_day, stop_bet_time: Time.current + 1.day)
+    match = FactoryBot.create(:match, match_day: match_day)
+    bet = FactoryBot.create(:bet, match: match)
+    match_day.update(stop_bet_time: Time.current - 1.hour)
+    expect{bet.update(score1: 2)}.to not_change{bet.reload.score1}
+  end
 
   it "gives 3 points for exact bid" do
     user = FactoryBot.build(:user)

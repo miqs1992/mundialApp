@@ -1,0 +1,29 @@
+<%= form_tag update_bets_path, :remote => true do %>
+    <div class="box-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Drużyna 1</th>
+                    <th>Wynik 1</th>
+                    <th>Drużyna 2</th>
+                    <th>Wynik 2</th>
+                </tr>
+                <% @bets.each do |bet| %>
+                    <%= fields_for 'bets[]', bet do |b| %>
+                        <tr>
+                            <td><%= bet.match.team1.print %></td>
+                            <td><%= b.number_field(:score1, in: 0..10) %></td>
+                            <td><%= bet.match.team2.print %></td>
+                            <td><%= b.number_field(:score2, in: 0..10) %></td>
+                        </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer clearfix">
+        <div class="actions">
+            <%= submit_tag "Zapisz", class: 'btn btn-primary' %>
+        </div>
+    </div>
+<% end %>

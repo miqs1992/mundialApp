@@ -5,8 +5,6 @@ RSpec.configure do |config|
 end 
 
 RSpec.describe UsersController, type: :controller do
-   
-
     before do
         user = FactoryBot.create(:user, :admin)
         allow(controller).to receive(:authenticate_user!).and_return(true)
