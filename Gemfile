@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.1.6'
 gem 'dotenv-rails', groups: [:development, :test]
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'sass-rails', '~> 5.0'
