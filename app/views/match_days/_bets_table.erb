@@ -1,0 +1,22 @@
+ <div class="box-body">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Drużyna 1</th>
+                <th>Wynik 1</th>
+                <th>Drużyna 2</th>
+                <th>Wynik 2</th>
+                <th>Punkty</th>
+            </tr>
+            <% @bets.each do |bet| %>
+                <tr>
+                    <td><%= bet.match.team1.print %></td>
+                    <td><%= bet.score1 %></td>
+                    <td><%= bet.match.team2.print %></td>
+                    <td><%= bet.score2 %></td>
+                    <td><%= bet.points %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

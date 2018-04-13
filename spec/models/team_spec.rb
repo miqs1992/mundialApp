@@ -18,4 +18,10 @@ RSpec.describe Team, type: :model do
   it { should have_many(:players) } 
   it { should validate_uniqueness_of(:name) }
   it { should validate_uniqueness_of(:flag) }
+
+  it "prints team with flag" do 
+    team = FactoryBot.create(:team)
+    expected = "<span class=\"flag-icon flag-icon-#{team.flag}\"></span> #{team.name}"
+    expect(team.print).to eq(expected)
+  end
 end

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :users, :except => [:show, :update, :edit] 
   resources :bets, :only => [:index]
+  post 'bets/update_bets', to: 'bets#update_many', as: 'update_bets'
+  resources :match_days, :only => [:show, :index]
 
   resources :matches, :except => [:destroy, :show] do
     member do
@@ -17,5 +19,4 @@ Rails.application.routes.draw do
       patch 'set_score'
     end
   end
-  
 end
