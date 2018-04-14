@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    return unless !current_user.admin?
+    return if current_user.admin?
     redirect_to root_path, alert: I18n.t('errors.messages.access_denied') 
   end
 end
