@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
       email: "j.kowalski@gmail.com",
       password: "password123"
     )
-    expect(user).to be_valid  
+    expect(user).to be_valid
   end
 
   it { should validate_presence_of(:first_name) }
@@ -25,7 +25,8 @@ RSpec.describe User, type: :model do
   it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_length_of(:password).is_at_least(8) }
   it { should validate_length_of(:password).is_at_most(32) }
-  it { should have_many(:bets) } 
+  it { should have_many(:bets) }
+  it { should belong_to(:top_team).class_name('Team').with_foreign_key('team_id').optional }
 
   it "returns a user's full name as a string" do
     user = FactoryBot.build(:user, first_name: "Jan", last_name: "Kowalski")
