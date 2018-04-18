@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin, only: %i[new index]
+  before_action :authorize_current_user, only: %i[edit update]
   skip_before_action :check_team_and_player, only: %i[edit update]
 
   def new

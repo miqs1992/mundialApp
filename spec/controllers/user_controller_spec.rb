@@ -6,9 +6,9 @@ end
 
 RSpec.describe UsersController, type: :controller do
   before do
-    user = FactoryBot.create(:user, :admin)
+    @user = FactoryBot.create(:user, :admin)
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    allow(controller).to receive(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
 
   describe '#index' do
@@ -62,10 +62,6 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#edit' do
-    before(:each) do
-      @user = FactoryBot.create(:user)
-    end
-
     it 'responds successfully' do
       get :edit, params: { id: @user.id }
       expect(response).to be_success
@@ -75,11 +71,16 @@ RSpec.describe UsersController, type: :controller do
       get :edit, params: { id: @user.id }
       expect(response).to have_http_status '200'
     end
+
+    it 'returns a 302 response if visit different user' do
+      user = FactoryBot.create(:user)
+      get :edit, params: { id: user.id }
+      expect(response).to have_http_status '302'
+    end
   end
 
   describe '#update' do
     before(:each) do
-      @user = FactoryBot.create(:user)
       @team = FactoryBot.create(:team)
       @player = FactoryBot.create(:player)
       FactoryBot.create(:match_day, stop_bet_time: Time.current + 1.day)

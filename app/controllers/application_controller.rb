@@ -24,4 +24,9 @@ class ApplicationController < ActionController::Base
     return if !before_first_game? || current_user.picked_tops?
     redirect_to edit_user_path(current_user)
   end
+
+  def authorize_current_user
+    return if current_user.id.to_s == params[:id]
+    redirect_to root_path, alert: I18n.t('errors.messages.access_denied')
+  end
 end
