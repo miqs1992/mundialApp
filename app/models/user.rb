@@ -46,5 +46,7 @@ class User < ApplicationRecord
     UserMailer.init_password_email(self, raw_token).deliver_later
   end
 
-
+  def picked_tops?
+    !(player_id.nil? || team_id.nil?)
+  end
 end

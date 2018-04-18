@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authorize_admin
+  before_action :authorize_admin, only: %i[new index]
+  skip_before_action :check_team_and_player, only: %i[edit update]
 
   def new
     @user = User.new
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @teams = Team.includes(:players).all
   end
 
   def update
