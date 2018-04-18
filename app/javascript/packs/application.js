@@ -17,3 +17,4 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 import '../src/stylesheet.scss'
+import '../src/select2'

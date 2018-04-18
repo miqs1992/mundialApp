@@ -44,3 +44,10 @@ html, body {
       text-align: center !important;
     }
   }
+
+  .select2-container{
+    width: 100% !important;
+    span.select2-selection{
+      height: 34px;
+    }
+  }
