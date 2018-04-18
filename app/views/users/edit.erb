@@ -4,6 +4,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Wybierz mistrza i króla strzelców</h3>
       </div>
+      <% if  before_first_game? %>
       <%= form_for @user do |f| %>
         <div class="box-body">
           <div class="form-group">
@@ -25,6 +26,7 @@
             <%= f.submit "Zapisz", class: 'btn btn-primary' %>
           </div>
         </div>
+      <% end %>
       <% end %>
     </div>
   </div>

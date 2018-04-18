@@ -3,12 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_team_and_player, unless: :devise_controller?
-
-  def before_first_game?
-    start_time = MatchDay.minimum(:stop_bet_time)
-    start_time.nil? || start_time > Time.current
-  end
-
+  include ApplicationHelper
+  
   protected
 
   def configure_permitted_parameters
