@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :team do
-    name {Faker::Address.unique.country }
-    flag {Faker::Address.unique.country_code_long}
+    sequence(:name) { |n| "name#{n}" }
+    sequence(:flag) { |n| "fl#{n}" }
   end
 end

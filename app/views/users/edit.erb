@@ -1,0 +1,16 @@
+<div class='row'>
+  <div class='col-lg-12'>
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Wybierz mistrza i króla strzelców</h3>
+      </div>
+      <% if before_first_game? %>
+        <%= render :partial => "users/edit_select" %>
+      <% else %>
+        <%= render :partial => "users/edit_table" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+          
