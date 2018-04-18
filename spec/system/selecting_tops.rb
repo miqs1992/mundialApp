@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Betting', type: :system do
+RSpec.describe 'Selecting Tops', type: :system do
   before(:each) do
     @user = FactoryBot.create(:user, :no_tops)
     @match_day = FactoryBot.create(:match_day, stop_bet_time: Time.current + 1.day)
@@ -28,8 +28,24 @@ RSpec.describe 'Betting', type: :system do
 
   it "doesn't redirect if user picked tops" do
     @user.update(team_id: Team.first.id, player_id: Player.first.id)
-    @user.save!
     visit root_path
     expect(current_path).to eq(root_path)
+  end
+
+  it "doesn't render form if after first game" do
+    @user.update(team_id: Team.first.id, player_id: Player.first.id)
+    FactoryBot.create(:match_day, stop_bet_time: Time.current - 1.day)
+    visit edit_user_path(@user)
+    expect(page).not_to have_selector('#commit-button')
+  end
+
+  it 'selects tops', js: true do
+    visit edit_user_path(@user)
+    select(Team.last.name, from: 'user[team_id]')
+    select(Player.last.name, from: 'user[player_id]')
+    click_on 'Zapisz'
+    expect(current_path).to eq(root_path)
+    expect(@user.reload.team_id).to eq(Team.last.id)
+    expect(@user.player_id).to eq(Player.last.id)
   end
 end
