@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415055505) do
+ActiveRecord::Schema.define(version: 20180420153428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20180415055505) do
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_bets_on_match_id"
     t.index ["user_id"], name: "index_bets_on_user_id"
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "match_days", force: :cascade do |t|
@@ -81,6 +87,16 @@ ActiveRecord::Schema.define(version: 20180415055505) do
     t.index ["name"], name: "index_teams_on_name"
   end
 
+  create_table "user_leagues", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "league_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_user_leagues_on_league_id"
+    t.index ["user_id", "league_id"], name: "index_user_leagues_on_user_id_and_league_id", unique: true
+    t.index ["user_id"], name: "index_user_leagues_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,6 +123,8 @@ ActiveRecord::Schema.define(version: 20180415055505) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
+  add_foreign_key "user_leagues", "leagues"
+  add_foreign_key "user_leagues", "users"
   add_foreign_key "users", "players"
   add_foreign_key "users", "teams"
 end

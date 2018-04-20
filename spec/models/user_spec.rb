@@ -26,6 +26,8 @@ RSpec.describe User, type: :model do
   it { should validate_length_of(:password).is_at_most(32) }
   it { should have_many(:bets) }
   it { should belong_to(:top_team).class_name('Team').with_foreign_key('team_id').optional }
+  it { should have_many(:user_leagues).dependent(:destroy) }
+  it { should have_many(:leagues).through(:user_leagues) }
 
   it "returns a user's full name as a string" do
     user = FactoryBot.build(:user, first_name: 'Jan', last_name: 'Kowalski')

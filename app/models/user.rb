@@ -14,6 +14,8 @@ class User < ApplicationRecord
   belongs_to :top_player, class_name: 'Player', foreign_key: 'player_id', optional: true
 
   has_many :bets
+  has_many :leagues, through: :user_leagues
+  has_many :user_leagues, dependent: :destroy
 
   attr_accessor :devise_login
 
