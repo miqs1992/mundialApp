@@ -1,1 +1,5 @@
+$(".alerts").append("<%= (j render(
+    :partial => 'layouts/alerts', :locals => { :notice => "Opuściłeś ligę" }
+)) %>");
+
 $("#league_" + + <%= @league_id %>).find(".actions").html('<%= render_join(@league_id).html_safe %>')

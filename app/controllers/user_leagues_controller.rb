@@ -2,7 +2,7 @@ class UserLeaguesController < ApplicationController
   def create
     @ul = current_user.user_leagues.new(user_league_params)
     if @ul.save
-      @notice = "Dodano do ligi o id: #{@ul.league_id}"
+      @notice = "Dołączyłeś do ligi o id: #{@ul.league_id}"
     else
       @alert = @ul.errors.full_messages.first
     end
