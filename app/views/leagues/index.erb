@@ -1,0 +1,41 @@
+<div class='row'>
+  <div class='col-lg-12'>
+    <div class="box box-primary text-center">
+      <div class="box-header">
+        <h3 class="box-title">Ligi</h3>
+        <div class="box-tools">
+          <% if current_user.admin %>
+            <%= link_to "Utwórz nową ligę", new_league_path, :class => "btn btn-primary btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>
+              <th style="width: 20px">Id</th>
+              <th>Nazwa</th>
+              <th>Uczestnicy</th>
+              <th>Miejsce</th>
+              <th>Akcje</th>
+            </tr>
+            <% @leagues.each do |league| %>
+              <tr id="league_<%= league.id %>">
+                <td><%= league.id %></td>
+                <td><%= link_to league.name, league_path(league) %></td>
+                <td><%= league.user_leagues.count %></td>
+                <% if ul = league.user_leagues.where(user_id: current_user.id).first %>
+                  <td>-</td>
+                  <td class="actions" id="ul_<%= ul.id %>"><%= render_leave(ul) %></td>
+                <% else %>
+                  <td>-</td>
+                  <td class="actions"><%= render_join(league.id) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </body>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

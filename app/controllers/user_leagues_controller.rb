@@ -9,6 +9,7 @@ class UserLeaguesController < ApplicationController
   end
   
   def destroy
+    @league_id = params[:league_id]
     UserLeague.find(params[:id]).destroy
   end
 

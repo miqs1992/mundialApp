@@ -1,0 +1,3 @@
+<% if @notice %>
+  $("#league_" + + <%= @ul.league.id %>).find(".actions").html('<%= render_leave(@ul).html_safe %>')
+<% end %>

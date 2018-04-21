@@ -23,4 +23,16 @@ RSpec.describe 'Leagues management', type: :system do
     expect { click_on "Utwórz" }.to change(League, :count).by(1)
     expect(League.first.main).to eq(true)
   end
+
+  it 'allows user to join and leave league', js: true do
+    @league = FactoryBot.create(:league)
+    visit leagues_path
+    expect(page).to have_content('Dołącz')
+    click_on 'Dołącz'
+    expect(page).to have_content('Wystąp')
+    expect(@user.leagues.count).to eq(1)
+    click_on 'Wystąp'
+    expect(page).to have_content('Dołącz')
+    expect(@user.leagues.count).to eq(0)
+  end
 end
