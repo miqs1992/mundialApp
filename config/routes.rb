@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'bets/update_bets', to: 'bets#update_many', as: 'update_bets'
   resources :match_days, :only => [:show, :index]
   resources :leagues, :except => [:update, :edit]
+  resources :user_leagues, :only => [:create, :destroy]
 
   resources :matches, :except => [:destroy, :show] do
     member do
