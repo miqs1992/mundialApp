@@ -9,11 +9,14 @@ class User < ApplicationRecord
   validates_presence_of :login
   validates_uniqueness_of :login
   validates_uniqueness_of :email
+  validates_numericality_of :points, greater_than_or_equal_to: 0
 
   belongs_to :top_team, class_name: 'Team', foreign_key: 'team_id', optional: true
   belongs_to :top_player, class_name: 'Player', foreign_key: 'player_id', optional: true
 
   has_many :bets
+  has_many :user_leagues, dependent: :destroy
+  has_many :leagues, through: :user_leagues
 
   attr_accessor :devise_login
 
@@ -21,8 +24,14 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
-  def points
-    bets.pluck(:points).inject(0, :+)
+  def calculate_points
+    self.update(points: bets.pluck(:points).inject(0, :+))
+  end
+
+  def self.recalculate
+    User.all.each do |u|
+      u.calculate_points
+    end
   end
 
   def self.find_for_database_authentication(warden_conditions)
