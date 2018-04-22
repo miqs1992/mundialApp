@@ -65,4 +65,10 @@ RSpec.describe User, type: :model do
     user.update(player_id: player.id)
     expect(user.picked_tops?).to eq(true)
   end
+
+  it 'adds user to main leagues after create' do
+    league = FactoryBot.create(:league, main: true)
+    user = FactoryBot.create(:user)
+    expect(user.leagues).to include(league)
+  end
 end
