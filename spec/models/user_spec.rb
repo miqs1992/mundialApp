@@ -28,21 +28,23 @@ RSpec.describe User, type: :model do
   it { should belong_to(:top_team).class_name('Team').with_foreign_key('team_id').optional }
   it { should have_many(:user_leagues).dependent(:destroy) }
   it { should have_many(:leagues).through(:user_leagues) }
+  it { should validate_numericality_of(:points).is_greater_than_or_equal_to(0) }
 
   it "returns a user's full name as a string" do
     user = FactoryBot.build(:user, first_name: 'Jan', last_name: 'Kowalski')
     expect(user.name).to eq 'Jan Kowalski'
   end
 
-  it 'sums user bids points' do
+  it 'recalculates users ponits' do
     user = FactoryBot.create(:user)
     FactoryBot.create(:bet, points: 3, user: user)
     FactoryBot.create(:bet, points: 1, user: user)
     FactoryBot.create(:bet, points: 0, user: user)
     user1 = FactoryBot.create(:user)
     FactoryBot.create(:bet, points: 3, user: user1)
-    expect(user.points).to eq 4
-    expect(user1.points).to eq 3
+    User.recalculate
+    expect(user.reload.points).to eq 4
+    expect(user1.reload.points).to eq 3
   end
 
   it 'sends welcome mail' do
