@@ -10,5 +10,10 @@ class MatchDay < ApplicationRecord
     self.matches.each do |m|
       m.calculate
     end
+    User.recalculate
+  end
+
+  def is_bet?(user)
+    Bet.where(match_id: self.matches.pluck(:id), user_id: user.id).any?
   end
 end

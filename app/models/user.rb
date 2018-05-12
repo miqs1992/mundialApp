@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :user_leagues, dependent: :destroy
   has_many :leagues, through: :user_leagues
 
+  after_create :add_to_main_leagues
+
   attr_accessor :devise_login
 
   def name
@@ -57,5 +59,11 @@ class User < ApplicationRecord
 
   def picked_tops?
     !(player_id.nil? || team_id.nil?)
+  end
+
+  def add_to_main_leagues
+    League.where(main: true).each do |league|
+      self.leagues << league
+    end
   end
 end

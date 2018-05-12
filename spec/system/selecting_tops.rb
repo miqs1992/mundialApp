@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Selecting Tops', type: :system do
   before(:each) do
+    FactoryBot.create(:league, main: true)
     @user = FactoryBot.create(:user, :no_tops)
     @match_day = FactoryBot.create(:match_day, stop_bet_time: Time.current + 1.day)
     3.times do

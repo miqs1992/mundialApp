@@ -121,4 +121,9 @@ RSpec.describe Bet, type: :model do
     bet = FactoryBot.build(:bet, score1: 1, score2: 1)
     expect(bet.winner).to eql(0)
   end
+
+  it 'prints bet' do
+    bet = FactoryBot.build(:bet, score1: 1, score2: 2)
+    expect(bet.print).to eq("1 - 2")
+  end
 end
