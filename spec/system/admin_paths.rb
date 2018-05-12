@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Administration', type: :system do
   before(:each) do
+    FactoryBot.create(:league, main: true)
     FactoryBot.create(:round)
     @match_day = FactoryBot.create(:match_day)
     4.times do

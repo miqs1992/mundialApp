@@ -7,7 +7,7 @@ services:
 env: 
   - RAILS_ENV=test
 before_script:
-  - gem install bundler
+  - gem update --system
   - cp ./.travis.database.yml ./config/database.yml
   - travis_retry yarn install
   - RAILS_ENV=test bin/rails webpacker:compile

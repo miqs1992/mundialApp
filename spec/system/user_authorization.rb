@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Login to application', :type => :system do
+  before(:each) do
+    FactoryBot.create(:league, main: true)
+  end
+  
   it 'redirects to log in page' do
     visit '/'
     expect(page).to have_content I18n.t('devise.failure.unauthenticated')
