@@ -43,6 +43,17 @@ html, body {
     th{
       text-align: center !important;
     }
+    .box-body{
+      table{
+        tbody{
+          tr{
+            th{
+              text-align: center !important;
+            }
+          }
+        }
+      }
+    }
   }
 
   .select2-container{

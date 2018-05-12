@@ -35,4 +35,14 @@ RSpec.describe MatchDay, type: :model do
     expect(bet2.reload.points).to eq(1)
     expect(bet3.reload.points).to eq(3)
   end
+
+  it 'checks if user has bet on this match_day' do 
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    match_day = FactoryBot.create(:match_day)
+    match1 = FactoryBot.create(:match, match_day: match_day)
+    FactoryBot.create(:bet, match: match1, score1: 0, score2: 2, user: user1 )
+    expect(match_day.is_bet?(user1)).to eq(true)
+    expect(match_day.is_bet?(user2)).to eq(false)
+  end
 end

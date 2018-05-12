@@ -1,7 +1,7 @@
 # https://medium.com/@skunkworker/rails-5-1-system-tests-on-travis-ci-5b03cbc9014d
 language: ruby
 rvm:
-  - 2.3.3
+  - 2.5.1
 services:
   - postgresql
 env: 
