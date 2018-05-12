@@ -2,6 +2,8 @@
 class Player < ApplicationRecord
   validates_presence_of :first_name
   validates_presence_of :last_name
+  validates_presence_of :number
+  validates_uniqueness_of :number, scope: :team_id
 
   belongs_to :team
   has_many :selected_by, class_name: 'User', foreign_key: 'player_id'

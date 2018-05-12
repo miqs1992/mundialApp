@@ -1,0 +1,31 @@
+<div class='row'>
+  <div class='col-lg-12'>
+    <div class="box box-primary text-center">
+      <div class="box-header">
+        <h3 class="box-title">Zawodnicy</h3>
+      </div>
+      <div class="box-body no-padding">
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>              
+              <th>Imię i nazwisko</th>
+              <th>Numer</th>
+              <th>Drużyna</th>
+              <th>Gole</th>
+              <th>Asysty</th>
+            </tr>
+            <% @players.each do |p| %>
+              <tr id="player_<%= p.id %>">
+                <td><%= current_user.admin ? link_to(p.name, edit_player_path(p)) : p.name %></td>
+                <td><%= p.number %></td>
+                <td><%= p.team.print %></td>
+                <td><%= p.goals %></td>
+                <td><%= p.assists %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
