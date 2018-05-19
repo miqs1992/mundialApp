@@ -1,6 +1,6 @@
 class BetsController < ApplicationController
   def index
-    @bets = current_user.bets.includes(:match).order(id: :desc)
+    @bets = current_user.bets.includes(:match).order('matches.start_time')
   end
 
   def update_many
