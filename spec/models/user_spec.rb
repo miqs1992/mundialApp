@@ -71,4 +71,37 @@ RSpec.describe User, type: :model do
     user = FactoryBot.create(:user)
     expect(user.leagues).to include(league)
   end
+
+  it 'adds 12 points if proper tops picked' do
+    user = FactoryBot.create(:user)
+    user.top_team.update(winner: true)
+    user.top_player.update(king: true)
+    User.recalculate
+    expect(user.reload.points).to eq 12
+  end
+ 
+  it 'adds 5 points if proper king picked' do
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:team, winner: true)
+    user.top_player.update(king: true)
+    User.recalculate
+    expect(user.reload.points).to eq 5
+  end
+
+  it 'adds 7 points if proper winner picked' do
+    user = FactoryBot.create(:user)
+    user.top_team.update(winner: true)
+    FactoryBot.create(:player, king: true)
+    User.recalculate
+    expect(user.reload.points).to eq 7
+  end
+
+  it 'does not add points if wrong picks' do
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:team, winner: true)
+    FactoryBot.create(:player, king: true)
+    User.recalculate
+    expect(user.reload.points).to eq 0
+  end
+  
 end

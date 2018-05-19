@@ -13,4 +13,8 @@ class Player < ApplicationRecord
   def name
     first_name + ' ' + last_name
   end
+
+  def self.king
+    all.where(king: true).first
+  end
 end
