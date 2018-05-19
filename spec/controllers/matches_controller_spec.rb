@@ -121,7 +121,7 @@ RSpec.describe MatchesController, type: :controller do
           }
         end .to not_change { @match.reload.start_time }
       end
-      it 'redirects to the new match page' do
+      it 'redirects to edit' do
         patch :update, params: {
           id: @match.id,
           match: { start_time: nil }

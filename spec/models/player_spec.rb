@@ -33,4 +33,7 @@ RSpec.describe Player, type: :model do
   it { should validate_presence_of(:number) }
   it { should belong_to(:team) }
   it { should have_many(:selected_by).class_name('User').with_foreign_key('player_id') }
+  it { should validate_numericality_of(:goals).is_greater_than_or_equal_to(0) }
+  it { should validate_numericality_of(:assists).is_greater_than_or_equal_to(0) }
+
 end
