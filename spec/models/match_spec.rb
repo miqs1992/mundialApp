@@ -93,7 +93,7 @@ RSpec.describe Match, type: :model do
 
   it 'prints points' do
     match = FactoryBot.create(:match)
-    expect(match.print_score).to eq("w trakcie")
+    expect(match.print_score).to eq("nie zakończony")
     match.set_score(3,0)
     expect(match.print_score).to eq("3 - 0")
   end

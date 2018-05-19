@@ -11,6 +11,8 @@ class Match < ApplicationRecord
 
   has_many :bets
 
+  default_scope { includes(:team1, :team2) }
+
   def winner
     case
       when !self.finished
@@ -42,7 +44,7 @@ class Match < ApplicationRecord
     if self.finished
       "#{self.score1} - #{self.score2}"
     else
-      "w trakcie"
+      "nie zakończony"
     end
   end
 
