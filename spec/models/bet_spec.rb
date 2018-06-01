@@ -129,28 +129,17 @@ RSpec.describe Bet, type: :model do
     expect(bet.print).to eq("1 - 2")
   end
 
-  it 'is invalid if bonus already used' do
+  it 'checks if bonus already used' do
     user = FactoryBot.create(:user)
     round = FactoryBot.create(:round)
     md1 = FactoryBot.create(:match_day, round: round)
     md2 = FactoryBot.create(:match_day, round: round)
     m1 = FactoryBot.create(:match, match_day: md1)
     m2 = FactoryBot.create(:match, match_day: md2)
-    FactoryBot.create(:bet, match: m1, bonus: true, user: user)
-    invalid = FactoryBot.build(:bet, match: m2, bonus: true, user: user)
-    expect(invalid).not_to be_valid 
-  end
-
-  it 'allows to set bonus later' do
-    user = FactoryBot.create(:user)
-    round = FactoryBot.create(:round)
-    md1 = FactoryBot.create(:match_day, round: round)
-    md2 = FactoryBot.create(:match_day, round: round)
-    m1 = FactoryBot.create(:match, match_day: md1)
-    m2 = FactoryBot.create(:match, match_day: md2)
-    FactoryBot.create(:bet, match: m1, user: user)
-    bet = FactoryBot.create(:bet, match: m2, user: user)
-    expect(bet.update_attributes(bonus: true)).to be_truthy
-    expect(bet.reload.bonus).to be_truthy
+    bet1 = FactoryBot.create(:bet, match: m1, user: user)
+    bet2 = FactoryBot.create(:bet, match: m2, user: user)
+    expect(bet2.is_bonus_used?).to be_falsey
+    bet1.update(bonus: true)
+    expect(bet2.is_bonus_used?).to be_truthy
   end
 end

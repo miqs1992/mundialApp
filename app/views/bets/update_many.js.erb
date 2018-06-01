@@ -1,8 +1,17 @@
+$("button.close").click();
 $(".alerts").append("<%= (j render(
-    :partial => 'layouts/alerts', :locals => { :alert => @alert, :notice => @alert.nil? ? "Zaktualizowano zakłady" : nil }
+  :partial => 'layouts/alerts', :locals => { :alert => @alert, :notice => @alert.nil? ? "Zaktualizowano zakłady" : nil }
 )) %>");
 <% @bets.each do |b| %>
-    document.getElementById("bets_<%= b.id %>_score1").value = <%= b.score1 %>
-    document.getElementById("bets_<%= b.id %>_score2").value = <%= b.score2 %>
+  document.getElementById("bets_<%= b.id %>_score1").value = <%= b.score1 %>
+  document.getElementById("bets_<%= b.id %>_score2").value = <%= b.score2 %>
+  var bonus = document.getElementById("bets_<%= b.id %>_bonus")
+  <% if b.bonus %>
+    bonus.classList.remove("fa-close")
+    bonus.classList.add("fa-check")
+  <% else %>
+    bonus.classList.remove("fa-check")
+    bonus.classList.add("fa-close")
+  <% end %>
 <% end %>
 

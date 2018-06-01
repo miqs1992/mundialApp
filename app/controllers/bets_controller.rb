@@ -4,16 +4,22 @@ class BetsController < ApplicationController
   end
 
   def update_many
-    @alert = nil
-    @bets = []
-    params[:bets].keys.each do |id|
-      bet = Bet.find(id)
-      next unless bet.user_id == current_user.id
-      unless bet.update_attributes(bet_params(params[:bets][id]))
-        @alert = bet.errors.first
+    @bets = Bet.where(id: params[:bets].keys, user_id: current_user.id)
+    @bets.update_all(bonus: false)
+    @bets.each do |bet|
+      unless bet.update(bet_params(params[:bets][bet.id.to_s]))
+        @alert = bet.errors.first[1]
       end
-      @bets << bet
     end
+    if params[:bonus] && !params[:bonus][:bet_id].empty?
+      bonus_bet = @bets.find(params[:bonus][:bet_id].to_i)
+      if bonus_bet.is_bonus_used?
+        @alert = "Bonus został zużyty"
+      else
+        bonus_bet.update(bonus: true)
+      end
+    end
+    @bets.reload
   end
 
   private
@@ -21,5 +27,4 @@ class BetsController < ApplicationController
   def bet_params(my_params)
     my_params.permit(:score1, :score2)
   end
-    
 end
