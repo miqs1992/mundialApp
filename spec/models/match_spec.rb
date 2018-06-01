@@ -40,6 +40,7 @@ RSpec.describe Match, type: :model do
   it { should belong_to(:match_day) }
   it { should belong_to(:team1).class_name('Team') }
   it { should belong_to(:team2).class_name('Team') }
+  it { should delegate_method(:round).to(:match_day) }
 
   it "returns 1 if team1 won" do
     match = FactoryBot.build(:match)

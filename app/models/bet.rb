@@ -7,9 +7,13 @@ class Bet < ApplicationRecord
   validates_presence_of :points
   validates_uniqueness_of :user_id, scope: :match_id
   validate :stop_bet_time_is_ok
+  validate :validate_bonus
 
   belongs_to :user
   belongs_to :match
+
+  delegate :match_day, to: :match
+  delegate :round, to: :match
 
   def calculate
     match = self.match
@@ -45,5 +49,10 @@ class Bet < ApplicationRecord
       return if self.match.nil? #crashed other tests
       errors.add(:base, "It is too late for changing") if self.match.match_day.stop_bet_time < Time.current
     end 
+
+    def validate_bonus
+      return if self.match.nil? #crashed other tests
+      errors.add(:base, "Bonus already used") if self.round.is_bonus_used?(self.user_id)
+    end
 
 end

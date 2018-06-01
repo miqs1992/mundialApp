@@ -10,6 +10,7 @@ class Match < ApplicationRecord
   belongs_to :match_day
 
   has_many :bets
+  delegate :round, to: :match_day
 
   default_scope { includes(:team1, :team2) }
 
