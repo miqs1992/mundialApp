@@ -26,13 +26,25 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
-  def calculate_points
-    self.update(points: bets.pluck(:points).inject(0, :+))
+  def calculate_points(king, winner)
+    points = bets.pluck(:points).inject(0, :+)
+    
+    if picked_tops? && top_player == king
+      points += 5
+    end
+
+    if picked_tops? && top_team == winner
+      points += 7
+    end
+
+    self.update(points: points)
   end
 
   def self.recalculate
-    User.all.each do |u|
-      u.calculate_points
+    king = Player.king
+    winner = Team.winner
+    all.each do |u|
+      u.calculate_points(king, winner)
     end
   end
 

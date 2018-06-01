@@ -11,4 +11,8 @@ class Team < ApplicationRecord
   def print
     "<span class=\"flag-icon flag-icon-#{flag}\"></span> #{name}".html_safe
   end
+
+  def self.winner
+    all.where(winner: true).first
+  end
 end
