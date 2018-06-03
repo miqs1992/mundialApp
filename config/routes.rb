@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :users, :except => [:show]
   resources :bets, :only => [:index]
   post 'bets/update_bets', to: 'bets#update_many', as: 'update_bets'
-  resources :match_days, :only => [:show, :index]
+  resources :match_days, :only => [:show, :index] do
+    member do
+      get 'finish'
+    end
+  end
   resources :leagues, :except => [:update, :edit]
   resources :user_leagues, :only => [:create, :destroy]
 

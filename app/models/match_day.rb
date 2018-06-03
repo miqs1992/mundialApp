@@ -11,6 +11,7 @@ class MatchDay < ApplicationRecord
       m.calculate
     end
     User.recalculate
+    User.send_match_day_email(self)
   end
 
   def is_bet?(user)

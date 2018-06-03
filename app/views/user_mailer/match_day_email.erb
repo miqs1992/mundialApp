@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="mail.css">
+</head>
+<body>
+<section class="mail-content">
+  <div class="mail-box">
+    <div class="mail-box-header">
+      <h3 class="mail-box-title">Mundial App - zakończono dzień meczowy</h3>
+    </div>
+    <div class="mail-box-body">
+      <p>Witaj <b><%= @user.name %></b>! Oto jak Ci poszło w tym dniu:</p>
+      <table class="mail-table">
+        <tbody>
+          <tr>
+            <th>Drużyny</th>
+            <th>Wynik</th>
+            <th>Zakład</th>
+            <th>Punkty</th>
+          </tr>
+          <% @match_day.matches.each do |m| %>
+            <tr id="match_<%= m.id %>">
+              <td><%= m.print_teams.html_safe %></td>
+              <td><%= m.print_score %></td>
+              <% bet = m.bets.where(user_id: @user.id).first %>
+              <% if bet.nil? %>
+                <td>-</td>
+                <td>0</td>
+              <% else %>
+                <td><%= bet.print %></td>
+                <td><%= bet.points %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <p>W sumie masz <%= @user.points %> punktów</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

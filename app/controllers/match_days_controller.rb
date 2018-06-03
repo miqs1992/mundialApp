@@ -15,4 +15,14 @@ class MatchDaysController < ApplicationController
   def index
     @match_days = MatchDay.includes(:round, :matches).all
   end
+
+  def finish
+    @match_day = MatchDay.includes(:matches).find(params[:id])
+    if @match_day.matches.where(finished: false).any?
+      @alert = "Nie wszystkie mecze są zakończone"
+    else
+      @match_day.calculate
+      @notice = "Zakończono dzień meczowy #{@match_day.id}"
+    end
+  end
 end

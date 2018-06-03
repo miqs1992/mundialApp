@@ -22,15 +22,15 @@ RSpec.describe UserMailer, type: :mailer do
           UserMailer.init_password_email(user, "fakeToken").deliver_later
         end
       }.to change { ActionMailer::Base.deliveries.size }.by(1)
-  end
+    end
   
-  it 'sends init password email to the right user' do
+    it 'sends init password email to the right user' do
       perform_enqueued_jobs do
         UserMailer.init_password_email(user, "fakeToken").deliver_later
       end
   
       mail = ActionMailer::Base.deliveries.last
       expect(mail.to[0]).to eq user.email
-  end
+    end
   end
 end
