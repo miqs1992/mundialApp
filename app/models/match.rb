@@ -45,7 +45,7 @@ class Match < ApplicationRecord
     if self.finished
       "#{self.score1} - #{self.score2}"
     else
-      "nie zakończony"
+      "niezakończony"
     end
   end
 

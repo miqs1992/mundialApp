@@ -57,57 +57,51 @@ RSpec.describe Bet, type: :model do
   end
 
   it "gives 3 points for exact bid" do
-    user = FactoryBot.build(:user)
-    match = FactoryBot.build(:match, score1: 3, score2: 0, finished: true)
-    bet = Bet.new(
-      user: user,
-      match: match,
-      score1: 3,
-      score2: 0
-    )
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
+    bet = Bet.create(user: user, match: match, score1: 3, score2: 0)
+    match.set_score(3,0)
     bet.calculate
     expect(bet.points).to eql(3)
   end
 
   it "gives 1 point for proper winner bid" do
-    user = FactoryBot.build(:user)
-    match = FactoryBot.build(:match, score1: 3, score2: 0, finished: true)
-    bet = Bet.new(
-      user: user,
-      match: match,
-      score1: 1,
-      score2: 0
-    )
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
+    bet = Bet.create(user: user, match: match, score1: 1, score2: 0)
+    match.set_score(3,0)
     bet.calculate
     expect(bet.points).to eql(1)
   end
 
   it "gives 0 points for wrong bid" do
-    user = FactoryBot.build(:user)
-    match = FactoryBot.build(:match, score1: 3, score2: 0, finished: true)
-    bet = Bet.new(
-      user: user,
-      match: match,
-      score1: 2,
-      score2: 5
-    )
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
+    bet = Bet.create(user: user, match: match, score1: 0, score2: 2)
+    match.set_score(3,0)
     bet.calculate
     expect(bet.points).to eql(0)
+  end
+
+  it "multiplies points if bonud used" do
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    match = FactoryBot.create(:match)
+    bet1 = Bet.create(user: user1, match: match, score1: 3, score2: 0, bonus: true)
+    bet2 = Bet.create(user: user2, match: match, score1: 1, score2: 0, bonus: true)
+    match.set_score(3,0)
+    match.calculate
+    expect(bet1.reload.points).to eql(6)
+    expect(bet2.reload.points).to eql(2)
   end
 
   it "gives 0 points for match is not finished" do
-    user = FactoryBot.build(:user)
-    match = FactoryBot.build(:match, score1: 3, score2: 0)
-    bet = Bet.new(
-      user: user,
-      match: match,
-      score1: 2,
-      score2: 5
-    )
+    user = FactoryBot.create(:user)
+    match = FactoryBot.create(:match, score1: 3, score2: 0)
+    bet = Bet.create(user: user, match: match, score1: 3, score2: 0)
     bet.calculate
     expect(bet.points).to eql(0)
   end
-
 
   it "returns 1 if player bet team1 wins" do
     bet = FactoryBot.build(:bet, score1: 3, score2: 0)
