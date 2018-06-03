@@ -1,4 +1,5 @@
 class MatchDaysController < ApplicationController
+  before_action :authorize_admin, only: :finish
   def show
     @match_day = MatchDay.includes(:round, :matches).find(params[:id])
     @bets = []

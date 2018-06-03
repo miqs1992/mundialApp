@@ -34,6 +34,7 @@ RSpec.describe MatchDaysController, type: :controller do
 
   describe '#finish' do
     before(:each) do
+      @user.update(admin: true)
       @match1 = FactoryBot.create(:match, match_day: @match_day)
       @match2 = FactoryBot.create(:match, match_day: @match_day)
       @bet1 = @user.bets.create(match: @match1, score1: 3, score2: 0)
