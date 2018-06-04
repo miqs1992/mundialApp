@@ -10,6 +10,9 @@ class Match < ApplicationRecord
   belongs_to :match_day
 
   has_many :bets
+  delegate :round, to: :match_day
+
+  default_scope { includes(:team1, :team2) }
 
   def winner
     case
@@ -42,7 +45,7 @@ class Match < ApplicationRecord
     if self.finished
       "#{self.score1} - #{self.score2}"
     else
-      "w trakcie"
+      "niezakończony"
     end
   end
 

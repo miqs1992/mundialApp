@@ -1,29 +1,48 @@
+
 <%= form_tag update_bets_path, :remote => true do %>
-    <div class="box-body">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>Drużyna 1</th>
-                    <th>Wynik 1</th>
-                    <th>Drużyna 2</th>
-                    <th>Wynik 2</th>
-                </tr>
-                <% @bets.each do |bet| %>
-                    <%= fields_for 'bets[]', bet do |b| %>
-                        <tr>
-                            <td><%= bet.match.team1.print %></td>
-                            <td><%= b.number_field(:score1, in: 0..10) %></td>
-                            <td><%= bet.match.team2.print %></td>
-                            <td><%= b.number_field(:score2, in: 0..10) %></td>
-                        </tr>
-                    <% end %>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-    <div class="box-footer clearfix">
-        <div class="actions">
-            <%= submit_tag "Zapisz", class: 'btn btn-primary' %>
+  <div class="box-body">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <th>Drużyna 1</th>
+          <th>Wynik 1</th>
+          <th>Drużyna 2</th>
+          <th>Wynik 2</th>
+          <th>Bonus</th>
+        </tr>
+        <% @bets.each do |bet| %>
+          <%= fields_for 'bets[]', bet do |b| %>
+            <tr>
+              <td><%= bet.match.team1.print %></td>
+              <td><%= b.number_field(:score1, in: 0..10) %></td>
+              <td><%= bet.match.team2.print %></td>
+              <td><%= b.number_field(:score2, in: 0..10) %></td>
+              <td>
+                <i class='fa fa-<%= bet.bonus ? "check" : "close"%>' aria-hidden='true' id='bets_<%= bet.id %>_bonus'></i>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+     <% unless @match_day.round.is_bonus_used?(current_user.id) && @bonus_bet.nil? %>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 form-group">
+          <%= fields_for 'bonus' do |f| %>
+            <%= f.label "Bonus"%>
+            <%= f.select :bet_id, 
+              @bets.collect {|b| [ b.match.print_teams.html_safe, b.id ] }, 
+              { include_blank: "Zostaw na potem", selected: @bonus_bet.nil? ? nil : @bonus_bet.id }, 
+              { class: 'form-control' }  
+            %>
+          <% end %>
         </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="box-footer clearfix">
+    <div class="actions">
+      <%= submit_tag "Zapisz", class: 'btn btn-primary' %>
     </div>
+  </div>
 <% end %>

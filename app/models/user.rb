@@ -78,4 +78,10 @@ class User < ApplicationRecord
       self.leagues << league
     end
   end
+
+  def self.send_match_day_email(match_day)
+    User.all.each do |u|
+      UserMailer.match_day_email(u, match_day).deliver_later
+    end
+  end
 end

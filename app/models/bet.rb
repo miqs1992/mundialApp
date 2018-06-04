@@ -11,32 +11,41 @@ class Bet < ApplicationRecord
   belongs_to :user
   belongs_to :match
 
+  delegate :match_day, to: :match
+  delegate :round, to: :match
+
   def calculate
-    match = self.match
+    value = 0
     case
       when !match.finished
-        self.update_attribute(:points, 0)
-      when match.score1 == self.score1 && match.score2 == self.score2
-        self.update_attribute(:points, 3)
+        return
+      when match.score1 == self.score1 && match.score2 == self.score2 
+        value = 3
       when self.winner == match.winner
-        self.update_attribute(:points, 1)
-      else
-        self.update_attribute(:points, 0)
+        value = 1
     end
+    if self.bonus
+      value *= 2
+    end
+    self.update_attribute(:points, value)
   end
 
   def winner
     if(self.score1 == self.score2)
-      return 0
+      0
     elsif(self.score1 > self.score2)
-      return 1
+      1
     else
-      return 2
+      2
     end
   end
 
   def print
     "#{self.score1} - #{self.score2}"
+  end
+
+  def is_bonus_used?
+    self.round.is_bonus_used?(self.user_id, self.id)
   end
 
   private
@@ -45,5 +54,4 @@ class Bet < ApplicationRecord
       return if self.match.nil? #crashed other tests
       errors.add(:base, "It is too late for changing") if self.match.match_day.stop_bet_time < Time.current
     end 
-
 end

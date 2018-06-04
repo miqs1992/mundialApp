@@ -1,49 +1,79 @@
-body{
-    background-color: #ecf0f5;
+body {
+  background-color: #ecf0f5;
 }
 
 .mail-content {
-    background-color: #ecf0f5;
-    min-height: 250px;
-    padding: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  background-color: #ecf0f5;
+  min-height: 250px;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .mail-box {
-    position: relative;
-    border-radius: 3px;
-    background-color: #ffffff;
-    border-top: 3px solid #138de6;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    font-family: 'Source Sans Pro',sans-serif;
-    text-align: center;
+  position: relative;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border-top: 3px solid #138de6;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
 }
 
 .mail-box-header {
-    background-color: #138de6;
-    border-bottom: 1px solid #f4f4f4;
-    color: #f4f4f4;
-    display: block;
-    padding: 10px;
-    position: relative;
+  background-color: #138de6;
+  border-bottom: 1px solid #f4f4f4;
+  color: #f4f4f4;
+  display: block;
+  padding: 10px;
+  position: relative;
 }
 
 .mail-box-title {
-    display: inline-block;
-    font-size: 18px;
-    margin: 0;
-    line-height: 1;
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
 }
 
 .mail-box-body {
-    border-radius: 0 0 3px 3px;
-    padding: 10px;
+  border-radius: 0 0 3px 3px;
+  padding: 10px;
 }
 
 .mail-box-footer {
-    border-radius: 0 0 3px 3px;
-    border-top: 1px solid #f4f4f4;
-    padding: 10px;
+  border-radius: 0 0 3px 3px;
+  border-top: 1px solid #f4f4f4;
+  padding: 10px;
+}
+
+table.mail-table {
+  font-family: verdana, arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #333333;
+  border-width: 1px;
+  border-color: #3A3A3A;
+  border-collapse: collapse;
+}
+
+table.mail-table th {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #517994;
+  background-color: #74add6;
+}
+
+table.mail-table tr:hover td {
+  background-color: #DFEBF1;
+}
+
+table.mail-table td {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #517994;
+  background-color: #ffffff;
 }
