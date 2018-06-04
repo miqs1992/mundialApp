@@ -25,4 +25,6 @@ Rails.application.routes.draw do
       patch 'set_score'
     end
   end
+
+  resources :players, :only => [:index, :edit, :update]
 end
