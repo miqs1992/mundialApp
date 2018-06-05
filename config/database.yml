@@ -1,0 +1,19 @@
+default: &default
+  adapter: <%= ENV.fetch("DB_ADAPTER", "postgresql") %>
+  encoding: unicode
+  host: <%= ENV.fetch("POSTGRES_HOST", "0.0.0.0") %>
+  username: <%= ENV.fetch("POSTGRES_USER", "postgres") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", "password") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB_NAME", "mundialApp_dev") %>
+
+test:
+  <<: *default
+  database: mundialApp_test
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB_NAME", "mundialApp") %>

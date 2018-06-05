@@ -20,6 +20,8 @@ gem 'bootsnap', require: false
 gem 'kaminari'
 gem 'coveralls', require: false
 gem 'premailer-rails'
+gem 'activerecord-nulldb-adapter'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

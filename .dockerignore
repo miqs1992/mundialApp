@@ -1,0 +1,14 @@
+tmp/*
+log/*
+.byebug_history
+.gitignore
+.dockerignore
+public/packs
+public/packs-test
+coverage
+node_modules
+.env
+docker-compose.yml
+.solargraph.yml
+.travis.database.yml
+.travis.yml

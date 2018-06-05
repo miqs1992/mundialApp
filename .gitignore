@@ -24,8 +24,9 @@
 /public/packs
 /public/packs-test
 
-/config/database.yml
-
 /coverage
 
 .env
+.env.dev
+
+docker-compose.prod.yml

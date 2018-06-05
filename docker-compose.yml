@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file: .env.dev
+    command: bash -c "rm /typer/tmp/pids/server.pid ; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./app:/typer/app
+      - ./config:/typer/config
+      - ./db:/typer/db
+      - ./public/regions:/typer/public/regions
+      - ./public/mail.css:/typer/public/mail.css
+#      - ./Gemfile:/typer/Gemfile                      #used for bundle update
+#      - ./Gemfile.lock:/typer/Gemfile.lock
+    ports:
+      - "3000:3000"
