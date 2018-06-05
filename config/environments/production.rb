@@ -96,7 +96,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: ENV.fetch('IP_OR_DNS'), port: 80 }
+  config.action_mailer.default_url_options = { host: ENV.fetch('IP_OR_DNS', 'localhost'), port: 80 }
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
@@ -105,8 +105,8 @@ Rails.application.configure do
       domain: 'gmail.com',
       authentication: 'plain',
       enable_starttls_auto: true,
-      user_name: ENV.fetch('GMAIL_USERNAME'),
-      password: ENV.fetch('GMAIL_PASSWORD')
+      user_name: ENV.fetch('GMAIL_USERNAME', 'name'),
+      password: ENV.fetch('GMAIL_PASSWORD', 'password')
   }
 
   config.action_mailer.perform_caching = false
