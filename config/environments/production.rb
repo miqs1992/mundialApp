@@ -52,7 +52,9 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :info
+  # Hide view logs like rendering
+  config.action_view.logger = nil
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -84,6 +86,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
+    STDOUT.sync = true
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
@@ -91,4 +94,20 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: ENV.fetch('IP_OR_DNS'), port: 80 }
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain: 'gmail.com',
+      authentication: 'plain',
+      enable_starttls_auto: true,
+      user_name: ENV.fetch('GMAIL_USERNAME'),
+      password: ENV.fetch('GMAIL_PASSWORD')
+  }
+
+  config.action_mailer.perform_caching = false
 end
