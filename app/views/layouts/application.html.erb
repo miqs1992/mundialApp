@@ -10,12 +10,13 @@
     <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type => "image/x-icon" %>
   </head>
 
-  <body class="skin-black sidebar-mini fixed" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+  <body class="skin-black sidebar-mini" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
     <div class="wrapper">
       <%= render 'layouts/header' %>
+      <%= render 'layouts/footer' %>
       <%= render 'layouts/sidebar' %>
       <%= render 'layouts/contentwrapper' %>
-      <%= render 'layouts/footer' %>
+     
     </div>
   </body>
 </html>
