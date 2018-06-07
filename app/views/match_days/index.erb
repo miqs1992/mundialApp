@@ -12,8 +12,8 @@
               <th>Numer</th>
               <th>Koniec obstawiania</th>
               <th>Runda</th>
-              <th>Ilość meczy</th>
-              <th>Zakłady</th>
+              <th>Ilość meczów</th>
+              <th>Typy</th>
             </tr>
             <% @match_days.each do |day| %>
               <tr id="match_day_<%= day.id %>">
@@ -22,7 +22,7 @@
                 <td><%= I18n.l(day.stop_bet_time, format: :short) %></td>
                 <td><%= day.round.title %></td>
                 <td><%= day.matches.length %></td>
-                <td><%= link_to "Zakłady", match_day_path(day.id), :class => "btn btn-primary btn-xs" %></td>
+                <td><%= link_to "Typy", match_day_path(day.id), :class => "btn btn-primary btn-xs" %></td>
               </tr>
             <% end %>
           </tbody>
