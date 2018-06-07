@@ -11,28 +11,32 @@ CMD ["/sbin/my_init"]
 # Expose Nginx HTTP service
 EXPOSE 80
 
-# Start Nginx / Passenger
-RUN rm -f /etc/service/nginx/down
-
-# Remove the default site
-RUN rm /etc/nginx/sites-enabled/default
+# Start Nginx / Passenger and remove the default site
+RUN rm -f /etc/service/nginx/down \
+ && rm /etc/nginx/sites-enabled/default
 
 # Add the nginx site and config
 ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
 ADD rails-env.conf /etc/nginx/main.d/rails-env.conf
 
 # Install dependecies
-RUN apt-get update && apt-get install apt-transport-https
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn tzdata
+RUN apt-get update \
+ && apt-get install apt-transport-https \ 
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+ && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+ && apt-get update -qq \
+ && apt-get install -y build-essential libpq-dev nodejs yarn tzdata \
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install bundle of gems
 WORKDIR /tmp
 ADD Gemfile /tmp/
 ADD Gemfile.lock /tmp/
-RUN gem update --system && bundle install
+RUN gem update --system && bundle install \
+ && rm -rf /tmp/* /var/tmp/*
 
 # Add the Rails app
 RUN mkdir /home/app/typer
@@ -41,12 +45,9 @@ ADD . /home/app/typer
 RUN chown -R app:app /home/app/typer
 
 #Install js libraries and precompile assets with nulldb adapter -> assets:precompile tries to reach db for some reason
-RUN yarn cache clean
-RUN yarn install
-RUN bundle exec rake DB_ADAPTER=nulldb assets:precompile
-
-# Clean up APT and bundler when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN yarn cache clean \
+ && yarn install \
+ && bundle exec rake DB_ADAPTER=nulldb assets:precompile
 
 # Bootsnap needs it after compilation
 RUN chown -R app:app /home/app/typer
