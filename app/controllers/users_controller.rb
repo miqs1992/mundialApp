@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :authorize_admin, only: %i[new index]
   before_action :authorize_current_user, only: %i[edit update]
   skip_before_action :check_team_and_player, only: %i[edit update]
+  before_action :before_first_game, only: :picks
+  before_action :after_first_game, only: :edit
   include ApplicationHelper
 
   def new
@@ -41,6 +43,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def picks
+    @users = User.includes(:top_team, :top_player)
+  end
+
   private
 
   def user_params
@@ -49,5 +55,13 @@ class UsersController < ApplicationController
 
   def top_team_and_player_params
     params.require(:user).permit(:team_id, :player_id)
+  end
+
+  def before_first_game
+    redirect_to root_path, alert: 'Nie podglądamy!' if before_first_game?
+  end
+
+  def after_first_game
+    redirect_to picks_users_path unless before_first_game?
   end
 end

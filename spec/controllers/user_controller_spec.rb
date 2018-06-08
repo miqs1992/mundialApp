@@ -77,6 +77,13 @@ RSpec.describe UsersController, type: :controller do
       get :edit, params: { id: user.id }
       expect(response).to have_http_status '302'
     end
+
+    it 'redirects to picks if after first game' do
+      FactoryBot.create(:match_day, stop_bet_time: Time.current - 1.day)
+      get :edit, params: { id: @user.id }
+      expect(response).to have_http_status '302'
+      expect(response).to redirect_to picks_users_path
+    end
   end
 
   describe '#update' do
@@ -140,4 +147,22 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "#picks" do
+    it 'shows page if after first game' do
+      FactoryBot.create(:match_day, stop_bet_time: Time.current - 1.day)
+      get :picks
+      expect(response).to be_success
+      expect(response).to have_http_status '200'
+    end
+
+    it 'redirects to root if after first game' do
+      FactoryBot.create(:match_day, stop_bet_time: Time.current + 1.day)
+      get :picks
+      expect(response).to have_http_status '302'
+      expect(response).to redirect_to root_path
+      expect(flash[:alert]).to be_present
+    end
+  end
+  
 end

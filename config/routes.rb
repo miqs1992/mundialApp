@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   
   root "home#index"
 
-  resources :users, :except => [:show]
+  resources :users, :except => [:show] do
+    collection do
+      get 'picks'
+    end
+  end
   resources :bets, :only => [:index]
   post 'bets/update_bets', to: 'bets#update_many', as: 'update_bets'
   resources :match_days, :only => [:show, :index] do
