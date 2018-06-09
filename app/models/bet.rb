@@ -41,7 +41,7 @@ class Bet < ApplicationRecord
   end
 
   def print
-    "#{self.score1} - #{self.score2}"
+    "#{self.score1} - #{self.score2}#{" *" if self.bonus}"
   end
 
   def is_bonus_used?

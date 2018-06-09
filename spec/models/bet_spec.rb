@@ -121,6 +121,12 @@ RSpec.describe Bet, type: :model do
   it 'prints bet' do
     bet = FactoryBot.build(:bet, score1: 1, score2: 2)
     expect(bet.print).to eq("1 - 2")
+    expect(bet.print).not_to include("*")
+  end
+
+  it 'prints * if bonus' do
+    bet = FactoryBot.create(:bet, bonus: true)
+    expect(bet.print).to include("*")
   end
 
   it 'checks if bonus already used' do
