@@ -30,6 +30,28 @@ RSpec.describe MatchDaysController, type: :controller do
       get :show, params: { id: @match_day.id }
       expect(response).to have_http_status '200'
     end
+
+    it 'redirects to picks if after stop_bet_time' do
+      @match_day.update(stop_bet_time: Time.current - 1.hour)
+      get :show, params: { id: @match_day.id }
+      expect(response).to have_http_status '302'
+      expect(response).to redirect_to picks_match_day_path(id: @match_day.id)
+    end
+  end
+
+  describe '#picks' do
+    it 'responds successfully if after stop_bet_time' do
+      @match_day.update(stop_bet_time: Time.current - 1.hour)
+      get :picks, params: { id: @match_day.id }
+      expect(response).to be_success
+    end
+
+    it 'redirects to root if before stop_bet_time' do
+      get :picks, params: { id: @match_day.id }
+      expect(response).to have_http_status '302'
+      expect(response).to redirect_to root_path
+      expect(flash[:alert]).to be_present
+    end
   end
 
   describe '#finish' do

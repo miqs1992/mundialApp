@@ -8,13 +8,12 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/css/bootstrap-theme.min.css'
+//import 'bootstrap/dist/css/bootstrap-theme.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import 'adminlte/dist/css/AdminLTE.css'
+import 'adminlte/dist/css/AdminLTE.min.css'
 import 'adminlte/dist/js/adminlte.min'
-import 'adminlte/dist/css/skins/_all-skins.min.css'
+import 'adminlte/dist/css/skins/skin-red-light.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'flag-icon-css/css/flag-icon.min.css'
-
 import '../src/stylesheet.scss'
 import '../src/select2'

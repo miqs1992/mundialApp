@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :match_days, :only => [:show, :index] do
     member do
       get 'finish'
+      get 'picks'
     end
   end
   resources :leagues, :except => [:update, :edit]

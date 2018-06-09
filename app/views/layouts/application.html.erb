@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MundialApp</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gdyński Typer</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -10,7 +14,7 @@
     <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type => "image/x-icon" %>
   </head>
 
-  <body class="skin-black sidebar-mini" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+  <body class="skin-red-light sidebar-mini" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
     <div class="wrapper">
       <%= render 'layouts/header' %>
       <%= render 'layouts/footer' %>

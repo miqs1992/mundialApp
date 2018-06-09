@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-  background-color: #222d32
+  background-color: #f9fafc
 }
 
 //footer overrides
@@ -67,13 +67,18 @@ div.text-center{
   }
 }
 
-.alert{
-  margin: 15px;
+div.alert{
+  margin: 15px 15px 0 15px;
 }
 
 .login-box{
   .alert{
     margin-right: 0 !important;
     margin-left: 0 !important;
+    margin-bottom: 15px !important;
   }
+}
+
+.alerts{
+  padding-top: 1px;
 }
