@@ -88,13 +88,13 @@ RSpec.describe Match, type: :model do
     team1 = FactoryBot.create(:team)
     team2 = FactoryBot.create(:team)
     match = FactoryBot.create(:match, :team1 => team1, :team2 => team2)
-    expected = "<span class=\"flag-icon flag-icon-#{team1.flag}\"></span> #{team1.name} - <span class=\"flag-icon flag-icon-#{team2.flag}\"></span> #{team2.name}"
+    expected = "<span class=\"flag-icon flag-icon-#{team1.flag} hidden-xs\"></span> #{team1.name} - <span class=\"flag-icon flag-icon-#{team2.flag} hidden-xs\"></span> #{team2.name}"
     expect(match.print_teams).to eq(expected)
   end
 
   it 'prints points' do
     match = FactoryBot.create(:match)
-    expect(match.print_score).to eq("niezakończony")
+    expect(match.print_score).to eq("?")
     match.set_score(3,0)
     expect(match.print_score).to eq("3 - 0")
   end

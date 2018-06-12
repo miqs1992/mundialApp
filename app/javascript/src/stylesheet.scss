@@ -10,6 +10,10 @@ html, body {
   height: 100vh;
 }
 
+.content-wrapper{
+  margin-bottom: 20px;
+}
+
 body {
   background-color: #f9fafc
 }
@@ -81,4 +85,18 @@ div.alert{
 
 .alerts{
   padding-top: 1px;
+}
+
+.user-footer{
+  @media (max-width: 767px){
+    .btn-primary{
+      color: white !important;
+      background-color: #3c8dbc !important;
+    }
+    .btn-warning {
+      color: white !important;
+      background-color: #f39c12 !important;
+
+    }
+  } 
 }

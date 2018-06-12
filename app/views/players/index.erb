@@ -9,16 +9,16 @@
           <tbody>
             <tr>              
               <th>Imię i nazwisko</th>
-              <th>Numer</th>
-              <th>Drużyna</th>
+              <th class="hidden-xs">Numer</th>
+              <th class="hidden-xs">Drużyna</th>
               <th>Gole</th>
               <th>Asysty</th>
             </tr>
             <% @players.each do |p| %>
               <tr id="player_<%= p.id %>">
                 <td><%= current_user.admin ? link_to(p.name, edit_player_path(p)) : p.name %></td>
-                <td><%= p.number %></td>
-                <td><%= p.team.print %></td>
+                <td class="hidden-xs"><%= p.number %></td>
+                <td class="hidden-xs"><%= p.team.print %></td>
                 <td><%= p.goals %></td>
                 <td><%= p.assists %></td>
               </tr>

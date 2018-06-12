@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.order(:id)
   end
 
   def create
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def picks
-    @users = User.includes(:top_team, :top_player)
+    @users = User.includes(:top_team, :top_player).order(:id)
   end
 
   private

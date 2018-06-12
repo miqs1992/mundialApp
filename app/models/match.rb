@@ -38,14 +38,14 @@ class Match < ApplicationRecord
   end 
 
   def print_teams
-    [self.team1, self.team2].collect {|t| "<span class=\"flag-icon flag-icon-#{t.flag}\"></span> #{t.name}" }.join(" - ")
+    [self.team1, self.team2].collect {|t| "<span class=\"flag-icon flag-icon-#{t.flag} hidden-xs\"></span> #{t.name}" }.join(" - ")
   end
 
   def print_score
     if self.finished
       "#{self.score1} - #{self.score2}"
     else
-      "niezakończony"
+      "?"
     end
   end
 

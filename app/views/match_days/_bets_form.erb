@@ -1,14 +1,12 @@
 
 <%= form_tag update_bets_path, :remote => true do %>
-  <div class="box-body">
+  <div class="box-body table-responsive">
     <table class="table table-bordered table-striped">
       <tbody>
         <tr>
-          <th>Drużyna 1</th>
-          <th>Wynik 1</th>
-          <th>Drużyna 2</th>
-          <th>Wynik 2</th>
-          <th>Bonus</th>
+          <th colspan="2">Drużyna 1</th>
+          <th colspan="2">Drużyna 2</th>
+          <th class="hidden-xs">Bonus</th>
         </tr>
         <% @bets.each do |bet| %>
           <%= fields_for 'bets[]', bet do |b| %>
@@ -17,7 +15,7 @@
               <td><%= b.number_field(:score1, in: 0..10) %></td>
               <td><%= bet.match.team2.print %></td>
               <td><%= b.number_field(:score2, in: 0..10) %></td>
-              <td>
+              <td class="hidden-xs">
                 <i class='fa fa-<%= bet.bonus ? "check" : "close"%>' aria-hidden='true' id='bets_<%= bet.id %>_bonus'></i>
               </td>
             </tr>
