@@ -47,7 +47,8 @@ RUN chown -R app:app /home/app/typer
 #Install js libraries and precompile assets with nulldb adapter -> assets:precompile tries to reach db for some reason
 RUN yarn cache clean \
  && yarn install \
- && bundle exec rake DB_ADAPTER=nulldb assets:precompile
+ && bundle exec rake DB_ADAPTER=nulldb assets:precompile \
+ && rm -r /home/app/typer/node_modules
 
 # Bootsnap needs it after compilation
 RUN chown -R app:app /home/app/typer

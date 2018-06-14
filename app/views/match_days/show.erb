@@ -45,11 +45,6 @@
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">Twoje zakłady</h3>
-        <div class="box-tools">
-          <% if current_user.admin %>
-              <%= link_to "Zakończ", finish_match_day_path, class: "btn btn-primary btn-sm", remote: true %>
-          <% end %>
-        </div>
       </div>
       <% if @match_day.stop_bet_time > Time.current %>
         <%= render :partial => "match_days/bets_form"%>
