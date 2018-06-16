@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby25:0.9.32 AS builder
+FROM phusion/passenger-ruby25:0.9.33 AS builder
 
 # Set correct environment variables.
 ENV HOME /root
@@ -28,7 +28,7 @@ RUN yarn cache clean \
  && bundle exec rake DB_ADAPTER=nulldb assets:precompile \
  && rm -rf /home/app/typer/node_modules
 
-FROM phusion/passenger-ruby25:0.9.32
+FROM phusion/passenger-ruby25:0.9.33
 LABEL maintainer="Wojciech Mikusek" 
 
 # Set correct environment variables.
