@@ -22,6 +22,7 @@ before_script:
   - sleep 3
 sudo: required
 addons:
+  postgresql: "9.6"
   sources:
   - google-chrome
   apt:
@@ -30,5 +31,5 @@ addons:
 script:
   - bin/rails db:create 
   - bin/rails db:migrate
-  - bin/rspec
   - bin/rspec spec/system/*
+  - bin/rspec

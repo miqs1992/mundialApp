@@ -23,7 +23,7 @@
               <tr <%= "class=bg-yellow" if array.first.user == current_user%> >
                 <td><%= array.first.user.name %></td>
                 <% array.each do |bet| %>
-                  <td><%= bet.print %><%= " *" if bet.bonus %>
+                  <td><%= bet.print %></td>
                   <td><%= bet.points %> pkt</td>
                 <% end %>
               </tr>
