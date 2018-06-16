@@ -142,4 +142,13 @@ RSpec.describe Bet, type: :model do
     bet1.update(bonus: true)
     expect(bet2.is_bonus_used?).to be_truthy
   end
+
+  it 'returns proper css' do
+    bet = FactoryBot.create(:bet)
+    expect(bet.get_css).to eq("")
+    bet.update(points: 1)
+    expect(bet.get_css).to eq("draw")
+    bet.update(points: 3)
+    expect(bet.get_css).to eq("win")
+  end
 end

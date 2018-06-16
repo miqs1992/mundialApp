@@ -48,6 +48,17 @@ class Bet < ApplicationRecord
     self.round.is_bonus_used?(self.user_id, self.id)
   end
 
+  def get_css
+    case self.points
+    when 1..2
+      "draw"
+    when 3..6
+      "win"
+    else
+      ""
+    end
+  end
+
   private
 
     def stop_bet_time_is_ok

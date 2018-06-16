@@ -20,11 +20,13 @@
             </tr>
             <% @bets.each_pair do  |id, array|%>
             <% array = array.sort_by &:match_id %>
-              <tr <%= "class=bg-yellow" if array.first.user == current_user%> >
-                <td><%= array.first.user.name %></td>
+              <tr>
+                <td <%= "class=current_user" if array.first.user == current_user%>>
+                  <%= array.first.user.name %>
+                </td>
                 <% array.each do |bet| %>
                   <td><%= bet.print %></td>
-                  <td><%= bet.points %> pkt</td>
+                  <td class=<%= bet.get_css %>><%= bet.points %> pkt</td>
                 <% end %>
               </tr>
             <% end %>

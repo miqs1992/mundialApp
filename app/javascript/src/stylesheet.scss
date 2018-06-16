@@ -100,3 +100,16 @@ div.alert{
     }
   } 
 }
+
+td.current_user{
+  font-weight: bold;
+  color: red
+}
+
+td.draw{
+  background-color: #f3ee1299 !important;
+}
+
+td.win{
+  background-color: #3c8dbc48 !important;
+}
