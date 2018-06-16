@@ -37,7 +37,8 @@ ENV RAILS_ENV production
 
 # Download tzdata
 RUN apt-get update -qq && apt-get install -y --no-install-recommends tzdata \
- && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+ && gem update --system && gem install bundler
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
