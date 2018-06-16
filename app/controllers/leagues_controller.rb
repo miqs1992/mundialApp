@@ -5,7 +5,8 @@ class LeaguesController < ApplicationController
   end
 
   def show
-    @league = League.includes(:users).find(params[:id])
+    @league = League.find(params[:id])
+    @users = @league.users.exact_bets
   end
 
   def new

@@ -21,6 +21,9 @@ class User < ApplicationRecord
   after_create :add_to_main_leagues
 
   attr_accessor :devise_login
+  
+  scope :exact_bets, -> { select("users.*, Count(bets.id) filter (where bets.points in (3,6)) as bets_count").joins(:bets).group(:id) }
+  
 
   def name
     first_name + ' ' + last_name

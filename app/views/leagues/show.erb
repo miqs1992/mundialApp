@@ -11,13 +11,15 @@
               <th>Miejsce</th>
               <th>Imię i nazwisko</th>
               <th>Punkty</th>
+              <th>Trafienia</th>
             </tr>
             <% i = 1 %>
-            <% @league.users.each do |user| %>
+            <% @users.each do |user| %>
               <tr id="user_<%= user.id %>">
                 <td class="js-place"> <%= @league.place(user) %> </td>
                 <td class="js-name"><%= user.name %></td>
                 <td class="js-points"><%= user.points %></td>
+                <td class="js-exact"><%= user.bets_count %></td>
               </tr>
             <% end %>
           </body>

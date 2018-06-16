@@ -103,5 +103,13 @@ RSpec.describe User, type: :model do
     User.recalculate
     expect(user.reload.points).to eq 0
   end
+
+  it 'shows exact bets count' do
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:bet, user: user, points: 0 )
+    FactoryBot.create(:bet, user: user, points: 3 )
+    FactoryBot.create(:bet, user: user, points: 6 )
+    expect(User.exact_bets.first.bets_count).to eq 2
+  end
   
 end
