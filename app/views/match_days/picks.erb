@@ -15,7 +15,7 @@
             <tr>
               <th>Gracz</th>
               <% @matches.each do |m| %>
-                <th colspan=2><%= m.print_teams.html_safe %></th>
+                <th colspan=2><%= render html: m.print_teams.html_safe %></th>
               <% end %>
             </tr>
             <% @bets.each_pair do  |id, array|%>
