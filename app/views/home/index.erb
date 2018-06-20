@@ -62,7 +62,7 @@
               </tr>
               <% @last_match_day.matches.each do |m| %>
                 <tr id="match_<%= m.id %>">
-                  <td><%= m.print_teams.html_safe %></td>
+                  <td><%= render html: m.print_teams.html_safe %></td>
                   <td><%= m.print_score %></td>
                   <% bet = m.bets.where(user_id: current_user.id).first %>
                   <% if bet.nil? %>
@@ -97,7 +97,7 @@
               </tr>
               <% @next_match_day.matches.each do |m| %>
                 <tr id="match_<%= m.id %>">
-                  <td><%= m.print_teams.html_safe %></td>
+                  <td><%= render html: m.print_teams.html_safe %></td>
                   <td class="hidden-xs"><%= m.city %></td>
                   <td><%= l(m.start_time, format: :short) %></td>
                   <% bet = m.bets.where(user_id: current_user.id).first %>
