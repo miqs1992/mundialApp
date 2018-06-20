@@ -17,7 +17,7 @@ class MatchDaysController < ApplicationController
   end
 
   def index
-    @match_days = MatchDay.includes(:round, :matches).all
+    @match_days = MatchDay.includes(:round, :matches).order(:day_number).all
   end
 
   def finish
