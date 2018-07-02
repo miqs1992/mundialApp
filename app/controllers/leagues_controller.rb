@@ -6,7 +6,7 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    @users = @league.users.exact_bets
+    @users = @league.get_ordered_users
   end
 
   def new
